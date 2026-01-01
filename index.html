@@ -1,48 +1,138 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Путь героя — фан-справочник</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f0c;
+      --card: #1c2a1f;
+      --accent: #ffd700;
+      --text: #e6f2ea;
+      --muted: #8fa99a;
+      --danger: #e74c3c;
+      --hover: #2ecc71;
+    }* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  background: linear-gradient(120deg, #102218, #0d1b14);
+  color: var(--text);
+}
 
+header {
+  padding: 20px;
+  text-align: center;
+  background: #07110b;
+  border-bottom: 3px solid var(--accent);
+}
 
+header h1 { font-size: 24px; color: var(--accent); margin: 0; }
+header .subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.warning { color: var(--danger); font-weight: 700; margin-top: 6px; font-size: 12px; }
 
-  
-  
-  
-  
-  
+main { max-width: 1200px; margin: 0 auto; padding: 16px; }
 
+.controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; justify-content: center; }
+input, select {
+  background: #0f1f12;
+  border: 2px solid var(--accent);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  transition: 0.2s;
+}
+input:focus, select:focus { border-color: var(--hover); outline: none; }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
 
-  
-Путь героя — фан-справочник
+.card {
+  background: linear-gradient(180deg, #12261b, var(--card));
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
 
-  
-Сервер Лололошки • Характеристики мобов
+.card h3 { margin: 0 0 8px 0; color: var(--accent); font-size: 14px; }
+.world { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.stat { font-size: 11px; margin-bottom: 3px; }
+.stat span { color: var(--muted); }
 
-  
-⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ
+footer { margin-top: 30px; padding: 16px; border-top: 2px solid var(--accent); font-size: 12px; color: var(--muted); text-align: center; }
+footer a { color: var(--accent); text-decoration: none; }
 
+  </style>
+</head>
+<body><header>
+  <h1>Путь героя — фан-справочник</h1>
+  <div class="subtitle">Сервер Лололошки • Характеристики мобов</div>
+  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>
+</header><main>
+  <div class="controls">
+    <input id="search" placeholder="Поиск по имени…" />
+    <select id="worldFilter">
+      <option value="all">Все миры</option>
+      <option value="Даливарика">Даливарика</option>
+      <option value="Миср">Миср</option>
+    </select>
+  </div>
+  <div id="cards" class="grid"></div>
+</main><footer>
+  <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
+  <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
+</footer><script>
+const enemies = [
+  // ===== Даливарика =====
+  { world: 'Даливарика', order: 1, name: 'Нежить', drops: ['Свиток «Шлем Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Сломанная кость — 10%'] },
+  { world: 'Даливарика', order: 2, name: 'Векс', drops: ['Свиток «Ботинки Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Фрагмент папируса — 10%'] },
+  { world: 'Даливарика', order: 3, name: 'Поборник', drops: ['Свиток «Штаны Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Камушек — 10%'] },
+  { world: 'Даливарика', order: 4, name: 'Природный элементаль', drops: ['Свиток «Кираса Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Вороной герб — 10%', 'Сломанная кость — 10%', 'Фрагмент папируса — 10%', 'Камушек — 10%'] },
+  { world: 'Даливарика', order: 5, name: 'Гримуар', drops: ['Все свитки брони', 'Осколок чёрного металла — 14%', 'Вороной герб — 14%', 'Сломанная кость — 14%', 'Фрагмент папируса — 14%', 'Камушек — 14%'] },
+  { world: 'Даливарика', order: 6, name: 'Спектральный некромант', drops: ['Все свитки брони', 'Осколок чёрного металла — 20%', 'Вороной герб — 20%', 'Сломанная кость — 20%', 'Фрагмент папируса — 20%', 'Камушек — 20%'] },
 
+  // ===== Миср =====
+  { world: 'Миср', order: 1, name: 'Песчаный голем', drops: ['Кристалл пустыни — 5%', 'Песчаный камень — 10%'] },
+  { world: 'Миср', order: 2, name: 'Сфинкс-страж', drops: ['Свиток «Обувь Сфинкса» — 6%', 'Золотой песок — 12%'] },
+  { world: 'Миср', order: 3, name: 'Пустынный призрак', drops: ['Песчаный кристалл — 8%', 'Осколок древнего камня — 10%'] },
+  { world: 'Миср', order: 4, name: 'Песчаный элементаль', drops: ['Кираса пустыни — 6%', 'Камень пустыни — 10%', 'Песчаный кристалл — 10%'] },
+  { world: 'Миср', order: 5, name: 'Хранитель оазиса', drops: ['Все свитки пустыни', 'Камень пустыни — 14%', 'Золотой песок — 14%'] },
+  { world: 'Миср', order: 6, name: 'Фараон-Некромант', drops: ['Все свитки пустыни', 'Камень пустыни — 20%', 'Золотой песок — 20%'] }
+];
 
-  
+const cards = document.getElementById('cards');
+const search = document.getElementById('search');
+const worldFilter = document.getElementById('worldFilter');
 
-    
-    
-      Все миры
-      Даливарика
-      Миср
-    
-  
+function render() {
+  const q = search.value.toLowerCase();
+  const w = worldFilter.value;
+  cards.innerHTML = '';
 
-  
+  enemies.filter(e => (w === 'all' || e.world === w))
+         .filter(e => e.name.toLowerCase().includes(q))
+         .forEach(e => {
+            const div = document.createElement('div');
+            div.className = 'card';
+            div.innerHTML = `
+              <h3>${e.order}. ${e.name}</h3>
+              <div class="world">Мир: ${e.world}</div>
+              ${e.drops.map(d => `<div class="stat">• ${d}</div>`).join('')}
+            `;
+            cards.appendChild(div);
+         });
+}
 
-
-
-
-  
-Есть доп. информация или вопросы — писать в Telegram-бота
-
-  
-@YoutubeHopper_bot
-
-
-
-
-
-
+search.addEventListener('input', render);
+worldFilter.addEventListener('change', render);
+render();
+</script></body>
+</html>
