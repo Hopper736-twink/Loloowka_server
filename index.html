@@ -56,15 +56,15 @@ header h1{
 
 /* settings button */
 .settingsBtn{ background:var(--card); border:2px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:700; }
-.settingsPanel{ display:none; max-width:1100px; margin:12px auto 0; padding:12px; border:2px solid var(--border); border-radius:12px; background:linear-gradient(180deg,#061529,#05101a); color:var(--muted); font-weight:700; }
+.settingsPanel{ display:none; max-width:720px; margin:12px auto 0; padding:12px; border:2px solid var(--border); border-radius:12px; background:linear-gradient(180deg,#061529,#05101a); color:var(--muted); font-weight:700; }
 .settingsPanel.active{ display:block; }
 
 /* main */
-main{ max-width:1300px; margin:16px auto; padding:14px; }
+main{ max-width:1100px; margin:16px auto; padding:14px; }
 
 /* controls */
 .controls{ display:flex; gap:12px; justify-content:center; margin-bottom:18px; flex-wrap:wrap; }
-input,select{ background:#070b14; border:2px solid var(--border); color:var(--text); padding:10px 14px; border-radius:12px; font-size:14px; font-weight:700; }
+input[type="text"], select, input[type="search"]{ background:#070b14; border:2px solid var(--border); color:var(--text); padding:10px 14px; border-radius:12px; font-size:14px; font-weight:700; }
 
 /* grid/cards */
 .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; }
@@ -91,13 +91,16 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
 .achievement-locked{ opacity:0.45; background:linear-gradient(180deg,#081025,var(--locked)); border-style:dashed; }
 .achievement-unlocked{ box-shadow:0 6px 18px rgba(0,0,0,0.6); border-color: #6be38a; }
 .small{ font-size:12px; color:var(--muted); font-weight:700; margin-top:8px; }
+.code-input{ display:flex; gap:8px; margin-top:8px; align-items:center; }
+.code-input input{ flex:1; }
+.btn{ background:var(--card); border:2px solid var(--border); color:var(--text); padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:700; }
 </style>
 </head>
 <body>
 
 <header>
   <h1>Путь героя — фан-справочник</h1>
-  <div class="subtitle">Сервер Лололошки • Мобы, предметы, престижа</div>
+  <div class="subtitle">Сервер Лололошки • мобы, предметы, престижа</div>
   <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>
 
   <div class="header-row">
@@ -122,10 +125,25 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
       <span>Показывать вкладку «Достижения»</span>
     </label>
 
+    <div style="margin-top:12px">
+      <div style="font-weight:700;margin-bottom:6px">Ввести код (каждый код даёт достижение)</div>
+      <div class="code-input">
+        <input id="promoCodeInput" type="text" placeholder="Введите код..." aria-label="Код достижения" />
+        <button id="promoApplyBtn" class="btn">Активировать</button>
+      </div>
+      <div id="codeMessage" class="small" style="margin-top:8px;color:var(--muted)"></div>
+    </div>
+
+    <div style="margin-top:12px">
+      <div style="font-weight:700;margin-bottom:6px">Подтверждение — «Я написал в бота»</div>
+      <button id="confirmMessagedBot" class="btn">Я написал в бота</button>
+      <div class="small" style="margin-top:8px;color:var(--muted)">Нажмите, если вы действительно написали в @YoutubeHopper_bot — достижение «помощник» будет выдано.</div>
+    </div>
+
     <div class="disclaimer">
       Внимание: фан-режим показывает фан-описания и секреты — это не официальный лор сервера.
     </div>
-    <div style="margin-top:10px;color:var(--muted)">Режимы и достижения сохраняются в браузере.</div>
+    <div style="margin-top:10px;color:var(--muted)">Режимы, достижения и использованные коды сохраняются в браузере.</div>
   </div>
 </header>
 
@@ -133,7 +151,7 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
   <!-- MOBS TAB -->
   <section id="tab-mobs" class="tab-content active">
     <div class="controls">
-      <input id="search" placeholder="Поиск по имени…" aria-label="Поиск мобов"/>
+      <input id="search" type="search" placeholder="Поиск по имени…" aria-label="Поиск мобов"/>
       <select id="worldFilter" aria-label="Выбор мира">
         <option value="all">Все миры</option>
         <option value="Даливарика">Даливарика</option>
@@ -207,11 +225,11 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
 </footer>
 
 <script>
-/* ---------------------------
-   Data: mobs, items, achievements
-   --------------------------- */
+/* =========================
+   Данные (мобы/предметы/достижения)
+   ========================= */
 
-// mobs (6 per world) — preserved order: Даливарика -> Миср -> Алотерра -> Междумирье
+/* mobs: порядок Даливарика -> Миср -> Алотерра -> Междумирье (6 в каждой) */
 const enemies = [
   // Даливарика (6)
   { world:'Даливарика', order:1, name:'Нежить', drops:['Свиток «Шлем Тёмного Рыцаря» — 6%','Вороной герб — 10%','Сломанная кость — 10%'], fan:'Древняя нежить, фан-легенда.' },
@@ -246,7 +264,7 @@ const enemies = [
   { world:'Междумирье', order:6, name:'Хранитель', drops:['Лоскут бездны — 15%','Осколок бездны — 15%','Сингулярная жемчужина — 15%','Ядро междумирья — 15%','Кристалл скинта — 15%'], fan:'Последний защитник реликвий, фан-легенда.' }
 ];
 
-// Items
+/* items (id, name, desc) */
 const items = [
   { id:'helm', name:'Свиток «Шлем»', desc:'Часть сета — шлем, даёт защиту.' },
   { id:'boots', name:'Свиток «Ботинки»', desc:'Снижает время передвижения.' },
@@ -268,10 +286,13 @@ const items = [
   { id:'silk', name:'Клочок шёлка', desc:'Материал для одежды.' }
 ];
 
-// Achievements (50): first 40 have name+requirement, last 10 are secret (no description)
+/* achievements: existing a1..a40 + s1..s10 (secret)
+   добавляем коды-ачивки a41..a45 и админ/помощник a46,a47 */
 const achievements = [
-  { id:'a1', name:'Первый взгляд', req:'Просмотреть любую карточку моба (клик)' },
-  { id:'a2', name:'Первые предметы', req:'Открыть карточку любого предмета (клик)' },
+  /* ... (оставляем прежние 40 + 10 секретов) */
+  // Для компактности вставим короткий набор — в реале можно описать все подробно:
+  { id:'a1', name:'Первый взгляд', req:'Просмотреть любую карточку моба' },
+  { id:'a2', name:'Первые предметы', req:'Открыть карточку любого предмета' },
   { id:'a3', name:'Миролюб', req:'Переключиться на вкладку Престиж' },
   { id:'a4', name:'Исследователь мира', req:'Посмотреть 6 разных мобов' },
   { id:'a5', name:'Коллекционер предметов', req:'Открыть 5 разных предметов' },
@@ -293,7 +314,7 @@ const achievements = [
   { id:'a20', name:'Писарь', req:'Прочитать 5 фан-описаний' },
 
   { id:'a21', name:'Полный список', req:'Просмотреть всех 24 моба' },
-  { id:'a22', name:'Коллекционер', req:'Открыть все предметы (вкл.)' },
+  { id:'a22', name:'Коллекционер', req:'Открыть все предметы' },
   { id:'a23', name:'Тайный читатель', req:'Включить фан-режим и прочитать 10 фан-описаний' },
   { id:'a24', name:'Серфер', req:'Использовать поиск 5 раз' },
   { id:'a25', name:'Фильтр-мастер', req:'Применить фильтр 10 раз' },
@@ -314,7 +335,18 @@ const achievements = [
   { id:'a39', name:'Аналитик', req:'Выполнить 20 поисков' },
   { id:'a40', name:'Прочти всё', req:'Прочитать все описания предметов' },
 
-  // 10 секретных (без описания/условия видимого)
+  // code achievements (будут выдаваться при вводе кода)
+  { id:'a41', name:'Код: support', req:'Активировать код поддержки (скрыт в интерфейсе)' },
+  { id:'a42', name:'Код: loofan', req:'Активировать код loofan' },
+  { id:'a43', name:'Код: achievements', req:'Активировать код achievements' },
+  { id:'a44', name:'Код: Hopper736', req:'Активировать код Hopper736' },
+  { id:'a45', name:'Код: (будет добавлен)', req:'Активировать пятый код' },
+
+  // admin/helper achievements
+  { id:'a46', name:'Админ', req:'Ввод кода special (code hop) даёт это достижение' },
+  { id:'a47', name:'Помощник', req:'Подтвердите, что написали в бота — достижение выдано' },
+
+  // 10 секретных достижений (без видимых условий)
   { id:'s1', name:'Секрет 1', secret:true },
   { id:'s2', name:'Секрет 2', secret:true },
   { id:'s3', name:'Секрет 3', secret:true },
@@ -327,29 +359,51 @@ const achievements = [
   { id:'s10', name:'Секрет 10', secret:true }
 ];
 
-/* ---------------------------
-   State, storage helpers
-   --------------------------- */
-
-const STORAGE_KEYS = {
-  FAN_MODE: 'hero_fan_mode_v1',
-  SHOW_ACH: 'hero_show_ach_v1',
-  ACH_UNLOCK: 'hero_ach_unlock_v1',
-  VIEWED_MOBS: 'hero_viewed_mobs_v1',
-  VIEWED_ITEMS: 'hero_viewed_items_v1',
-  CLICK_COUNT: 'hero_click_count_v1'
+/* =========================
+   Состояние и localStorage
+   ========================= */
+const STORAGE = {
+  FAN:'hero_fan_v1',
+  SHOW_ACH:'hero_show_ach_v1',
+  UNLOCK:'hero_unlocked_v1',
+  USED_CODES:'hero_used_codes_v1',
+  VIEWED_MOBS:'hero_viewed_mobs_v1',
+  VIEWED_ITEMS:'hero_viewed_items_v1',
+  CLICK_COUNT:'hero_clicks_v1'
 };
 
-let fanMode = localStorage.getItem(STORAGE_KEYS.FAN_MODE) === 'true';
-let showAchievements = localStorage.getItem(STORAGE_KEYS.SHOW_ACH) === 'true';
-let unlocked = JSON.parse(localStorage.getItem(STORAGE_KEYS.ACH_UNLOCK) || '[]');
-let viewedMobs = new Set(JSON.parse(localStorage.getItem(STORAGE_KEYS.VIEWED_MOBS) || '[]'));
-let viewedItems = new Set(JSON.parse(localStorage.getItem(STORAGE_KEYS.VIEWED_ITEMS) || '[]'));
-let clickCount = Number(localStorage.getItem(STORAGE_KEYS.CLICK_COUNT) || 0);
+let fanMode = localStorage.getItem(STORAGE.FAN) === 'true';
+let showAchievements = localStorage.getItem(STORAGE.SHOW_ACH) === 'true';
+let unlocked = JSON.parse(localStorage.getItem(STORAGE.UNLOCK) || '[]');
+let usedCodes = new Set(JSON.parse(localStorage.getItem(STORAGE.USED_CODES) || '[]'));
+let viewedMobs = new Set(JSON.parse(localStorage.getItem(STORAGE.VIEWED_MOBS) || '[]'));
+let viewedItems = new Set(JSON.parse(localStorage.getItem(STORAGE.VIEWED_ITEMS) || '[]'));
+let clickCount = Number(localStorage.getItem(STORAGE.CLICK_COUNT) || 0);
+let tabSwitchCount = Number(localStorage.getItem('hero_tab_switch_count') || 0);
+let settingsOpenCount = Number(localStorage.getItem('hero_settings_open_count') || 0);
 
-/* ---------------------------
+/* =========================
+   Коды (не отображаются в UI)
+   - НЕ ПИШИТЕ КОДЫ В ОТКРЫТЫЙ ТЕКСТ!
+   =========================
+   Здесь — список допустимых кодов и соответствующих достижений.
+   Не выводим их в интерфейс.
+*/
+const codeMap = {
+  'support': 'a41',
+  'loofan': 'a42',
+  'achievements': 'a43',
+  'Hopper736': 'a44',
+  // a45 оставлен для добавления кода позднее — можно установить вручную здесь
+  // 'yourcode5': 'a45'
+};
+
+// отдельный "админский" код (по условию пользователя)
+const adminCode = 'code hop'; // ввод этого кода выдаёт достижение 'a46'
+
+/* =========================
    DOM refs
-   --------------------------- */
+   ========================= */
 const openSettingsBtn = document.getElementById('openSettings');
 const settingsPanel = document.getElementById('settingsPanel');
 const fanModeToggle = document.getElementById('fanModeToggle');
@@ -360,46 +414,57 @@ const worldFilterEl = document.getElementById('worldFilter');
 const itemsGridEl = document.getElementById('itemGrid');
 const achievementsGridEl = document.getElementById('achievementsGrid');
 const achievementsInfoEl = document.getElementById('achievementsInfo');
+const promoInput = document.getElementById('promoCodeInput');
+const promoBtn = document.getElementById('promoApplyBtn');
+const codeMessage = document.getElementById('codeMessage');
+const confirmMessagedBot = document.getElementById('confirmMessagedBot');
 
-/* ---------------------------
-   Init UI state from storage
-   --------------------------- */
+/* =========================
+   Инициализация UI значений
+   ========================= */
 fanModeToggle.checked = fanMode;
 showAchievementsToggle.checked = showAchievements;
-// Hide achievements tab if showAchievements false
-function updateAchievementsTabVisibility(){
-  const tabBtn = document.querySelector('.tab[data-tab="achievements"]');
-  if(!showAchievements){
-    tabBtn.classList.add('hidden');
-    // if currently active, switch to mobs
-    if(tabBtn.classList.contains('active')){
-      document.querySelector('.tab[data-tab="mobs"]').click();
-    }
-  } else {
-    tabBtn.classList.remove('hidden');
-  }
-}
 updateAchievementsTabVisibility();
 
-/* ---------------------------
-   Utility helpers
-   --------------------------- */
-function saveUnlocked(){ localStorage.setItem(STORAGE_KEYS.ACH_UNLOCK, JSON.stringify(unlocked)); }
-function saveViewed(){ localStorage.setItem(STORAGE_KEYS.VIEWED_MOBS, JSON.stringify(Array.from(viewedMobs))); localStorage.setItem(STORAGE_KEYS.VIEWED_ITEMS, JSON.stringify(Array.from(viewedItems))); }
-function saveClickCount(){ localStorage.setItem(STORAGE_KEYS.CLICK_COUNT, String(clickCount)); }
-function saveFanMode(){ localStorage.setItem(STORAGE_KEYS.FAN_MODE, fanMode ? 'true' : 'false'); }
-function saveShowAchievements(){ localStorage.setItem(STORAGE_KEYS.SHOW_ACH, showAchievements ? 'true' : 'false'); }
+/* =========================
+   Сохранение состояния
+   ========================= */
+function saveState(){
+  localStorage.setItem(STORAGE.FAN, fanMode ? 'true' : 'false');
+  localStorage.setItem(STORAGE.SHOW_ACH, showAchievements ? 'true' : 'false');
+  localStorage.setItem(STORAGE.UNLOCK, JSON.stringify(unlocked));
+  localStorage.setItem(STORAGE.USED_CODES, JSON.stringify(Array.from(usedCodes)));
+  localStorage.setItem(STORAGE.VIEWED_MOBS, JSON.stringify(Array.from(viewedMobs)));
+  localStorage.setItem(STORAGE.VIEWED_ITEMS, JSON.stringify(Array.from(viewedItems)));
+  localStorage.setItem(STORAGE.CLICK_COUNT, String(clickCount));
+  localStorage.setItem('hero_tab_switch_count', String(tabSwitchCount));
+  localStorage.setItem('hero_settings_open_count', String(settingsOpenCount));
+}
 
-/* ---------------------------
+/* =========================
+   Helpers achievements
+   ========================= */
+function isUnlocked(id){ return unlocked.includes(id); }
+function unlock(id){
+  if(!isUnlocked(id)){
+    unlocked.push(id);
+    saveState();
+    renderAchievements(); // обновить UI
+    // эффект подсветки
+    const el = document.querySelector(`.achievement-card[data-id="${id}"]`);
+    if(el){ el.classList.add('achievement-unlocked'); setTimeout(()=>el.classList.remove('achievement-unlocked'), 1400); }
+  }
+}
+
+/* =========================
    Render functions
-   --------------------------- */
+   ========================= */
 
 function renderMobs(){
   const q = searchEl.value.trim().toLowerCase();
   const w = worldFilterEl.value;
   cardsEl.innerHTML = '';
 
-  // Order: Даливарика -> Миср -> Алотерра -> Междумирье
   const order = ['Даливарика','Миср','Алотерра','Междумирье'];
   order.forEach(worldName => {
     const list = enemies.filter(e => e.world === worldName);
@@ -415,20 +480,14 @@ function renderMobs(){
         }
         div.innerHTML = html;
 
-        // clicking a mob card counts as viewed (for achievements)
         div.addEventListener('click', ()=>{
           viewedMobs.add(e.name);
-          saveViewed();
-          clickCount++; saveClickCount();
+          clickCount++;
+          saveState();
           checkAchievements();
-          renderAchievements(); // update UI
         });
-        // keyboard accessibility
         div.addEventListener('keydown', (ev)=>{
-          if(ev.key === 'Enter' || ev.key === ' '){
-            div.click();
-            ev.preventDefault();
-          }
+          if(ev.key === 'Enter' || ev.key === ' '){ div.click(); ev.preventDefault(); }
         });
 
         cardsEl.appendChild(div);
@@ -446,10 +505,9 @@ function renderItems(){
     div.innerHTML = `<h3>${it.name}</h3><div class="small">${it.desc}</div>`;
     div.addEventListener('click', ()=>{
       viewedItems.add(it.id);
-      saveViewed();
-      clickCount++; saveClickCount();
+      clickCount++;
+      saveState();
       checkAchievements();
-      renderAchievements();
     });
     div.addEventListener('keydown',(ev)=>{
       if(ev.key==='Enter' || ev.key===' '){ div.click(); ev.preventDefault(); }
@@ -458,165 +516,112 @@ function renderItems(){
   });
 }
 
-/* ---------------------------
-   Achievements logic & rendering
-   --------------------------- */
-
-function isUnlocked(id){ return unlocked.includes(id); }
-function unlock(id){
-  if(!isUnlocked(id)){
-    unlocked.push(id);
-    saveUnlocked();
-    // small visual toast (temporary)
-    flashAchievement(id);
-  }
-}
-
-// Visual flash when unlocked
-function flashAchievement(id){
-  const el = document.querySelector(`.achievement-card[data-id="${id}"]`);
-  if(el){
-    el.classList.add('achievement-unlocked');
-    setTimeout(()=>el.classList.remove('achievement-unlocked'), 1600);
-  }
-}
-
-// Check conditions and unlock accordingly (basic demo conditions)
-function checkAchievements(){
-  // count values
-  const viewedMobsCount = viewedMobs.size;
-  const viewedItemsCount = viewedItems.size;
-
-  // map by id for easier checks
-  const cond = {
-    viewedMobsCount, viewedItemsCount, clickCount,
-    fanMode, showAchievements
-  };
-
-  // conditions (mirror descriptions above)
-  if(cond.viewedMobsCount >= 1) unlock('a1');
-  if(cond.viewedItemsCount >= 1) unlock('a2');
-  if(document.querySelector('.tab[data-tab="prestige"]').classList.contains('active')) unlock('a3');
-  if(cond.viewedMobsCount >= 6) unlock('a4');
-  if(cond.viewedItemsCount >= 5) unlock('a5');
-  if(cond.viewedItemsCount >= items.length) unlock('a6');
-  if(cond.fanMode) unlock('a7');
-  if(settingsPanel.classList.contains('active')) unlock('a8');
-  if(searchEl.value.trim().length > 0) unlock('a9');
-  if(worldFilterEl.value !== 'all') unlock('a10');
-
-  if(cond.viewedMobsCount >= 10) unlock('a11');
-  // toggles for other achievements — reasonable approximations:
-  if(window._tabSwitchCount >= 10) unlock('a12');
-  if(enemies.filter(e => e.world === worldFilterEl.value).length > 0 && worldFilterEl.value !== 'all') {
-    // viewed all of current world? check names
-    const world = worldFilterEl.value;
-    const totalInWorld = enemies.filter(e=>e.world===world).length;
-    const viewedInWorld = enemies.filter(e=>e.world===world && viewedMobs.has(e.name)).length;
-    if(viewedInWorld === totalInWorld) unlock('a13');
-  }
-  if(cond.viewedMobsCount >= 12) unlock('a14');
-  if(cond.viewedMobsCount >= 18) unlock('a15');
-  if(document.querySelector('.tab[data-tab="prestige"]').classList.contains('active')) {
-    // count visits
-    if(!window._prestigeVisitCount) window._prestigeVisitCount = 0;
-    window._prestigeVisitCount++;
-    if(window._prestigeVisitCount >= 5) unlock('a16');
-  }
-  // etc. we'll implement a few more automatic ones:
-  if(cond.viewedMobsCount >= 20) unlock('a17'); // open 20 fan descs ~ proxy
-  if(cond.viewedItemsCount >= 10) unlock('a19');
-  if(cond.viewedMobsCount >= enemies.length) unlock('a21'); // viewed all mobs (24)
-  if(cond.viewedItemsCount >= items.length) unlock('a22'); // all items
-  if(cond.fanMode && cond.viewedMobsCount >= 10) unlock('a23');
-  if(cond.clickCount >= 50) unlock('a26');
-  if(window._tabSwitchCount >= 20) unlock('a33');
-  if(cond.clickCount >= 100) unlock('a37');
-  if(settingsPanel.classList.contains('active') && window._settingsOpenCount >= 10) unlock('a38');
-  if(cond.viewedItemsCount >= 30 || (cond.viewedItemsCount + cond.viewedMobsCount) >= 30) unlock('a34');
-  if(cond.viewedItemsCount >= 18) unlock('a40');
-
-  // Secrets (demo triggers) — keep them rare: unlock by specific combos
-  if(cond.fanMode && cond.viewedMobsCount >= 24) unlock('s1'); // secret 1: fan + all mobs
-  if(cond.clickCount >= 250) unlock('s2');
-  // other secrets require obscure combos:
-  if(cond.fanMode && window._tabSwitchCount > 50) unlock('s3');
-  if(cond.viewedItemsCount >= 15 && cond.viewedMobsCount >= 15) unlock('s4');
-  // rest secret placeholders remain locked until you want custom triggers
-}
-
 function renderAchievements(){
   achievementsGridEl.innerHTML = '';
-  // if showAchievements false, show message
   if(!showAchievements){
-    achievementsGridEl.innerHTML = `<div class="small">Вкладка достижений скрыта в настройках. Открой Настройки → «Показывать вкладку «Достижения»», чтобы увидеть их.</div>`;
-    achievementsInfoEl.textContent = '';
+    achievementsGridEl.innerHTML = `<div class="small">Вкладка достижений скрыта (Настройки → Показывать вкладку «Достижения»).</div>`;
+    achievementsInfoEl.textContent = `Открыто ${unlocked.length} из ${achievements.length}`;
     return;
   }
 
   achievements.forEach(a=>{
     const div = document.createElement('div');
-    div.className = 'achievement-card';
+    div.className = 'achievement-card' + (isUnlocked(a.id) ? ' achievement-unlocked' : ' achievement-locked');
     div.dataset.id = a.id;
-    const unlockedFlag = isUnlocked(a.id);
-    if(!unlockedFlag) div.classList.add('achievement-locked');
-    let title = a.name + (a.secret ? ' 🔒' : '');
+    let title = a.name;
     let inner = `<h3>${title}</h3>`;
     if(!a.secret && a.req) inner += `<div class="small">${a.req}</div>`;
     else inner += `<div class="small">Секретное достижение — условие не отображается</div>`;
-    inner += `<div class="small">Статус: ${unlockedFlag ? 'Открыто' : 'Закрыто'}</div>`;
+    inner += `<div class="small">Статус: ${isUnlocked(a.id) ? 'Открыто' : 'Закрыто'}</div>`;
     div.innerHTML = inner;
-
-    // clicking an achievement when unlocked does nothing; if locked and secret — no hint
-    div.addEventListener('click', ()=>{
-      // allow manual reveal for testing if dev mode: not enabling here
-    });
-
     achievementsGridEl.appendChild(div);
   });
-
-  const total = achievements.length;
-  const unlockedCount = unlocked.length;
-  achievementsInfoEl.textContent = `Открыто ${unlockedCount} из ${total} достижений.`;
+  achievementsInfoEl.textContent = `Открыто ${unlocked.length} из ${achievements.length} достижений.`;
 }
 
-/* ---------------------------
-   Tab logic & events
-   --------------------------- */
-let _tabSwitchCount = Number(localStorage.getItem('hero_tab_switch_count') || 0);
-let _settingsOpenCount = Number(localStorage.getItem('hero_settings_open_count') || 0);
+/* =========================
+   Achievements checks (примитивные проверки)
+   ========================= */
 
+function checkAchievements(){
+  const vm = viewedMobs.size;
+  const vi = viewedItems.size;
+
+  if(vm >= 1) unlock('a1');
+  if(vi >= 1) unlock('a2');
+  if(document.querySelector('.tab[data-tab="prestige"]').classList.contains('active')) unlock('a3');
+  if(vm >= 6) unlock('a4');
+  if(vi >= 5) unlock('a5');
+  if(vi >= items.length) unlock('a6');
+  if(fanMode) unlock('a7');
+  if(settingsPanel.classList.contains('active')) unlock('a8');
+  if(searchEl.value.trim().length > 0) unlock('a9');
+  if(worldFilterEl.value !== 'all') unlock('a10');
+  if(vm >= 10) unlock('a11');
+  if(tabSwitchCount >= 10) unlock('a12');
+  // a13: viewed all mobs of currently filtered world
+  if(worldFilterEl.value !== 'all'){
+    const totalInWorld = enemies.filter(e=>e.world===worldFilterEl.value).length;
+    const viewedInWorld = enemies.filter(e=>e.world===worldFilterEl.value && viewedMobs.has(e.name)).length;
+    if(viewedInWorld === totalInWorld) unlock('a13');
+  }
+  if(vm >= 12) unlock('a14');
+  if(vm >= 18) unlock('a15');
+  if(typeof window._prestigeVisitCount !== 'undefined' && window._prestigeVisitCount >= 5) unlock('a16');
+  if(vm >= 20) unlock('a17');
+  if(vi >= 10) unlock('a19');
+  if(vm >= enemies.length) unlock('a21');
+  if(vi >= items.length) unlock('a22');
+  if(fanMode && vm >= 10) unlock('a23');
+  if(clickCount >= 50) unlock('a26');
+  if(tabSwitchCount >= 20) unlock('a33');
+  if(clickCount >= 100) unlock('a37');
+  if(settingsOpenCount >= 10) unlock('a38');
+  if((vi + vm) >= 30) unlock('a34');
+  if(vi >= 18) unlock('a40');
+
+  // secrets: demo triggers
+  if(fanMode && vm >= enemies.length) unlock('s1');
+  if(clickCount >= 250) unlock('s2');
+  if(fanMode && tabSwitchCount > 50) unlock('s3');
+  if(vi >= 15 && vm >= 15) unlock('s4');
+
+  saveState();
+}
+
+/* =========================
+   Tab logic
+   ========================= */
 document.querySelectorAll('.tab').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    const allTabs = document.querySelectorAll('.tab');
-    const allContents = document.querySelectorAll('.tab-content');
-    allTabs.forEach(b => b.classList.remove('active'));
-    allContents.forEach(c => c.classList.remove('active'));
+    // if tab is hidden, ignore
+    if(btn.classList.contains('hidden')) return;
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
     const content = document.getElementById('tab-' + btn.dataset.tab);
     if(content) content.classList.add('active');
-    _tabSwitchCount++;
-    localStorage.setItem('hero_tab_switch_count', String(_tabSwitchCount));
+    tabSwitchCount++; localStorage.setItem('hero_tab_switch_count', String(tabSwitchCount));
+    if(btn.dataset.tab === 'items') renderItems();
+    if(btn.dataset.tab === 'achievements') renderAchievements();
+    if(btn.dataset.tab === 'prestige'){ window._prestigeVisitCount = (window._prestigeVisitCount||0) + 1; }
     checkAchievements();
-    if(btn.dataset.tab === 'items'){ renderItems(); }
-    if(btn.dataset.tab === 'achievements'){ renderAchievements(); }
   });
 });
 
-/* ---------------------------
-   Settings panel toggles
-   --------------------------- */
-
+/* =========================
+   Settings toggles and panel
+   ========================= */
 openSettingsBtn.addEventListener('click', ()=>{
   const active = settingsPanel.classList.toggle('active');
   settingsPanel.setAttribute('aria-hidden', active ? 'false' : 'true');
-  _settingsOpenCount++; localStorage.setItem('hero_settings_open_count', String(_settingsOpenCount));
+  settingsOpenCount++; localStorage.setItem('hero_settings_open_count', String(settingsOpenCount));
   checkAchievements();
 });
 
 fanModeToggle.addEventListener('change', (e)=>{
   fanMode = !!e.target.checked;
-  saveFanMode();
+  saveState();
   renderMobs();
   checkAchievements();
   renderAchievements();
@@ -624,31 +629,72 @@ fanModeToggle.addEventListener('change', (e)=>{
 
 showAchievementsToggle.addEventListener('change', (e)=>{
   showAchievements = !!e.target.checked;
-  saveShowAchievements();
+  saveState();
   updateAchievementsTabVisibility();
 });
 
-/* ---------------------------
-   Other UI bindings
-   --------------------------- */
-searchEl.addEventListener('input', ()=>{
-  renderMobs();
-  checkAchievements();
-});
-worldFilterEl.addEventListener('change', ()=>{
-  renderMobs();
-  checkAchievements();
+/* =========================
+   Code input handling
+   ========================= */
+
+promoBtn.addEventListener('click', ()=>{
+  const raw = (promoInput.value || '').trim();
+  if(!raw){ codeMessage.textContent = 'Введите код.'; return; }
+  // normalized key (case-sensitive per mapping; allow lowercase input)
+  const keyLower = raw;
+  // admin-code special
+  if(keyLower === adminCode){
+    if(isUnlocked('a46')){ codeMessage.textContent = 'Достижение «Админ» уже получено.'; promoInput.value=''; return; }
+    unlock('a46');
+    usedCodes.add(adminCode);
+    saveState();
+    codeMessage.textContent = 'Код принят — вы получили достижение «Админ».';
+    promoInput.value='';
+    return;
+  }
+  // find matching code in codeMap (case-insensitive)
+  let matched = null;
+  for(const k in codeMap){
+    if(k.toLowerCase() === keyLower.toLowerCase()){
+      matched = k; break;
+    }
+  }
+  if(!matched){
+    codeMessage.textContent = 'Код не найден или неправильный.';
+    return;
+  }
+  const achId = codeMap[matched];
+  if(usedCodes.has(matched) || isUnlocked(achId)){
+    codeMessage.textContent = 'Этот код уже использован.';
+    promoInput.value='';
+    return;
+  }
+  // unlock and mark used
+  unlock(achId);
+  usedCodes.add(matched);
+  saveState();
+  codeMessage.textContent = 'Код принят — достижение выдано.';
+  promoInput.value='';
 });
 
-/* ---------------------------
-   Initial render
-   --------------------------- */
+/* =========================
+   Confirm "I wrote to bot" -> unlock helper (a47)
+   ========================= */
+confirmMessagedBot.addEventListener('click', ()=>{
+  if(isUnlocked('a47')){ alert('Достижение «Помощник» уже получено.'); return; }
+  // user confirms they messaged bot
+  unlock('a47');
+  saveState();
+  alert('Спасибо! Достижение «Помощник» выдано.');
+});
 
+/* =========================
+   Achievements tab visibility
+   ========================= */
 function updateAchievementsTabVisibility(){
   const tabBtn = document.querySelector('.tab[data-tab="achievements"]');
   if(!showAchievements){
     tabBtn.classList.add('hidden');
-    // if currently active, switch to mobs
     if(tabBtn.classList.contains('active')){
       document.querySelector('.tab[data-tab="mobs"]').click();
     }
@@ -656,29 +702,29 @@ function updateAchievementsTabVisibility(){
     tabBtn.classList.remove('hidden');
   }
 }
-updateAchievementsTabVisibility();
 
-function renderAll(){
+/* =========================
+   Misc bindings & initial render
+   ========================= */
+searchEl.addEventListener('input', ()=>{ renderMobs(); checkAchievements(); });
+worldFilterEl.addEventListener('change', ()=>{ renderMobs(); checkAchievements(); });
+
+document.addEventListener('click', (e)=>{
+  if(!e.target.closest('.settingsPanel')){ clickCount++; saveState(); checkAchievements(); }
+});
+
+function initialRender(){
   renderMobs();
   renderItems();
   renderAchievements();
+  checkAchievements();
+  updateAchievementsTabVisibility();
 }
-renderAll();
-checkAchievements();
+initialRender();
 
-/* ---------------------------
-   Small helper: click anywhere to count (for achievements)
-   --------------------------- */
-document.addEventListener('click', (e)=>{
-  // count clicks on page (exclude clicks inside settings toggles for fairness)
-  if(!e.target.closest('.settingsPanel')){
-    clickCount++; saveClickCount(); checkAchievements(); renderAchievements();
-  }
-});
-
-/* ---------------------------
-   Accessibility: keyboard shortcuts
-   --------------------------- */
+/* =========================
+   Small keyboard accessibility
+   ========================= */
 document.addEventListener('keydown', (e)=>{
   if(e.key === 'Escape' && settingsPanel.classList.contains('active')){
     settingsPanel.classList.remove('active');
