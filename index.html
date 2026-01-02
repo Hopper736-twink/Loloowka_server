@@ -29,127 +29,26 @@ header{
   padding:20px;
   text-align:center;
 }
-header h1{
-  font-family:'Press Start 2P',monospace;
-  color:var(--accent);
-  font-size:22px;
-  margin:0;
-}
-.subtitle{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:6px;
-  font-weight:700;
-}
-.warning{
-  color:#ff5252;
-  font-size:12px;
-  margin-top:6px;
-  font-weight:700;
-}
-.tabs{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin-top:16px;
-  flex-wrap:wrap;
-}
-.tab{
-  font-family:'Press Start 2P',monospace;
-  background:var(--card);
-  border:2px solid var(--border);
-  color:var(--text);
-  padding:10px 16px;
-  border-radius:12px;
-  cursor:pointer;
-  transition:.2s;
-  font-weight:700;
-}
-.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6);}
-.tab.active{
-  background:rgba(30,136,255,.15);
-  box-shadow:0 0 18px rgba(30,136,255,.8);
-}
-main{
-  max-width:1300px;
-  margin:0 auto;
-  padding:26px;
-}
-.controls{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  margin-bottom:26px;
-  flex-wrap:wrap;
-}
-input,select{
-  background:#070b14;
-  border:2px solid var(--border);
-  color:var(--text);
-  padding:10px 14px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:700;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:22px;
-}
-.card, .item-card, .prestige-card{
-  background:linear-gradient(180deg,#0d162a,var(--card));
-  border:2px solid var(--border);
-  border-radius:18px;
-  padding:22px;
-  box-shadow:0 0 20px rgba(30,136,255,.15);
-  font-weight:700;
-}
-.card h3, .item-card h3, .prestige-card h3{
-  font-family:'Press Start 2P',monospace;
-  color:var(--accent);
-  font-size:14px;
-  margin:0 0 14px 0;
-  font-weight:700;
-}
-.world{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:10px;
-  font-weight:700;
-}
-.stat{
-  font-size:14px;
-  margin-bottom:6px;
-  color:var(--text);
-  font-weight:700;
-}
-.items-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:22px;
-  margin-top:22px;
-}
-section h2{
-  font-family:'Press Start 2P',monospace;
-  color:var(--accent);
-  margin-bottom:18px;
-  font-weight:700;
-}
-footer{
-  border-top:2px solid var(--border);
-  margin-top:40px;
-  padding:20px;
-  text-align:center;
-  color:var(--muted);
-  font-weight:700;
-}
-footer a{
-  color:var(--accent);
-  text-decoration:none;
-  font-weight:700;
-}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+header h1{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:22px; margin:0; }
+.subtitle{color:var(--muted);font-size:13px;margin-top:6px;font-weight:700} 
+.warning{color:#ff5252;font-size:12px;margin-top:6px;font-weight:700}
+.tabs{ display:flex; justify-content:center; gap:12px; margin-top:16px; flex-wrap:wrap; }
+.tab{ font-family:'Press Start 2P',monospace; background:var(--card); border:2px solid var(--border); color:var(--text); padding:10px 16px; border-radius:12px; cursor:pointer; transition:.2s; font-weight:700; }
+.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6)} .tab.active{ background:rgba(30,136,255,.15); box-shadow:0 0 18px rgba(30,136,255,.8); }
+main{max-width:1300px;margin:0 auto;padding:26px}
+.controls{ display:flex; gap:12px; justify-content:center; margin-bottom:26px; flex-wrap:wrap; }
+input,select{ background:#070b14; border:2px solid var(--border); color:var(--text); padding:10px 14px; border-radius:12px; font-size:14px; font-weight:700; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+.card, .item-card, .prestige-card{ background:linear-gradient(180deg,#0d162a,var(--card)); border:2px solid var(--border); border-radius:18px; padding:22px; box-shadow:0 0 20px rgba(30,136,255,.15); font-weight:700; }
+.card h3, .item-card h3, .prestige-card h3{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:14px; margin:0 0 14px 0; font-weight:700; }
+.world{color:var(--muted);font-size:13px;margin-bottom:10px;font-weight:700} 
+.stat{font-size:14px;margin-bottom:6px;color:var(--text);font-weight:700}
+.items-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:22px; margin-top:22px; }
+section h2{ font-family:'Press Start 2P',monospace; color:var(--accent); margin-bottom:18px; font-weight:700; }
+footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-align:center; color:var(--muted); font-weight:700; } 
+footer a{color:var(--accent);text-decoration:none;font-weight:700}
+.tab-content{display:none} 
+.tab-content.active{display:block} 
 </style>
 </head>
 <body>
@@ -164,82 +63,86 @@ footer a{
   </nav>
 </header>
 <main>
-<section id="tab-mobs" class="tab-content active">
-  <div class="controls">
-    <input id="search" placeholder="Поиск по имени…" />
-    <select id="worldFilter">
-      <option value="all">Все миры</option>
-      <option value="Алотерра">Алотерра</option>
-      <option value="Междумирье">Междумирье</option>
-      <option value="Миср">Миср</option>
-      <option value="Даливарика">Даливарика</option>
-    </select>
-  </div>
-  <div id="cards" class="grid"></div>
-</section>
-<section id="tab-items" class="tab-content">
-<h2>Предметы</h2>
-<div class="items-grid">
-  <div class="item-card"><h3>Шлем</h3></div>
-  <div class="item-card"><h3>Ботинки</h3></div>
-  <div class="item-card"><h3>Штаны</h3></div>
-  <div class="item-card"><h3>Кираса</h3></div>
-  <div class="item-card"><h3>Песчинка всевластия</h3></div>
-  <div class="item-card"><h3>Сердце Джинна</h3></div>
-  <div class="item-card"><h3>Аметистовый кристалл</h3></div>
-  <div class="item-card"><h3>Рунная плита</h3></div>
-  <div class="item-card"><h3>Клочок шёлка</h3></div>
-  <div class="item-card"><h3>Лоскут бездны</h3></div>
-  <div class="item-card"><h3>Кристалл скинта</h3></div>
-  <div class="item-card"><h3>Ядро междумирья</h3></div>
-  <div class="item-card"><h3>Сингулярная жемчужина</h3></div>
-  <div class="item-card"><h3>Мини-реактор</h3></div>
-  <div class="item-card"><h3>Микросхема</h3></div>
-  <div class="item-card"><h3>Первичная материя</h3></div>
-  <div class="item-card"><h3>Сгусток неизвестной субстанции</h3></div>
-  <div class="item-card"><h3>Технопластина</h3></div>
-</div>
-</section>
-<section id="tab-prestige" class="tab-content">
-<h2>Престиж</h2>
-<div class="prestige-card">
-  <h3>1 уровень престижа</h3>
-  <ul>
-    <li>Урон: 1x → 1.15x</li>
-    <li>Защита: 1x → 1.15x</li>
-    <li>Здоровье: 1x → 1.15x</li>
-    <li>Регенерация: 1x → 1.16x</li>
-    <li>Скорость: 1x → 1x</li>
-    <li>Золото: 1x → 2.9x</li>
-    <li>Опыт: 1x → 2.9x</li>
-  </ul>
-  <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
-  <h3>2 уровень престижа</h3>
-  <ul>
-    <li>Урон: 1.15x → 1.32x</li>
-    <li>Защита: 1.15x → 1.31x</li>
-    <li>Здоровье: 1.15x → 1.32x</li>
-    <li>Регенерация: 1.16x → 1.33x</li>
-    <li>Скорость: 1x → 1x</li>
-    <li>Золото: 2.9x → 8.41x</li>
-    <li>Опыт: 2.9x → 8.41x</li>
-  </ul>
-  <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
-  <h3>3 уровень престижа</h3>
-  <ul>
-    <li>Урон: 1.32x → 1.52x</li>
-    <li>Защита: 1.31x → 1.5x</li>
-    <li>Здоровье: 1.32x → 1.52x</li>
-    <li>Регенерация: 1.33x → 1.54x</li>
-    <li>Скорость: 1x → 1x</li>
-    <li>Золото: 8.41x → 24.39x</li>
-    <li>Опыт: 8.41x → 24.39x</li>
-  </ul>
-  <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
-  <p>В будущем будут уровни 4, 5 и выше с ещё большими бонусами.</p>
-</div>
-</section>
+  <!-- Мобы -->
+  <section id="tab-mobs" class="tab-content active">
+    <div class="controls">
+      <input id="search" placeholder="Поиск по имени…" />
+      <select id="worldFilter">
+        <option value="all">Все миры</option>
+        <option value="Даливарика">Даливарика</option>
+        <option value="Миср">Миср</option>
+        <option value="Алотерра">Алотерра</option>
+        <option value="Междумирье">Междумирье</option>
+      </select>
+    </div>
+    <div id="cards" class="grid"></div>
+  </section>
+
+  <!-- Предметы -->
+  <section id="tab-items" class="tab-content">
+    <h2>Предметы</h2>
+    <div class="items-grid">
+      <div class="item-card"><h3>Шлем</h3></div>
+      <div class="item-card"><h3>Ботинки</h3></div>
+      <div class="item-card"><h3>Штаны</h3></div>
+      <div class="item-card"><h3>Кираса</h3></div>
+      <div class="item-card"><h3>Песчинка всевластия</h3></div>
+      <div class="item-card"><h3>Сердце Джинна</h3></div>
+      <div class="item-card"><h3>Аметистовый кристалл</h3></div>
+      <div class="item-card"><h3>Рунная плита</h3></div>
+      <div class="item-card"><h3>Клочок шёлка</h3></div>
+      <div class="item-card"><h3>Мини-реактор</h3></div>
+      <div class="item-card"><h3>Технопластина</h3></div>
+      <div class="item-card"><h3>Микросхема</h3></div>
+      <div class="item-card"><h3>Ядро междумирья</h3></div>
+      <div class="item-card"><h3>Сингулярная жемчужина</h3></div>
+      <div class="item-card"><h3>Кристалл скинта</h3></div>
+      <div class="item-card"><h3>Лоскут бездны</h3></div>
+    </div>
+  </section>
+
+  <!-- Престиж -->
+  <section id="tab-prestige" class="tab-content">
+    <h2>Престиж</h2>
+    <div class="prestige-card">
+      <h3>1 уровень престижа</h3>
+      <ul>
+        <li>Урон: 1x → 1.15x</li>
+        <li>Защита: 1x → 1.15x</li>
+        <li>Здоровье: 1x → 1.15x</li>
+        <li>Регенерация: 1x → 1.16x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 1x → 2.9x</li>
+        <li>Опыт: 1x → 2.9x</li>
+      </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+      <h3>2 уровень престижа</h3>
+      <ul>
+        <li>Урон: 1.15x → 1.32x</li>
+        <li>Защита: 1.15x → 1.31x</li>
+        <li>Здоровье: 1.15x → 1.32x</li>
+        <li>Регенерация: 1.16x → 1.33x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 2.9x → 8.41x</li>
+        <li>Опыт: 2.9x → 8.41x</li>
+      </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+      <h3>3 уровень престижа</h3>
+      <ul>
+        <li>Урон: 1.32x → 1.52x</li>
+        <li>Защита: 1.31x → 1.5x</li>
+        <li>Здоровье: 1.32x → 1.52x</li>
+        <li>Регенерация: 1.33x → 1.54x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 8.41x → 24.39x</li>
+        <li>Опыт: 8.41x → 24.39x</li>
+      </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+      <p>В будущем будут добавлены 4, 5 и следующие уровни престижа.</p>
+    </div>
+  </section>
 </main>
+
 <footer>
   <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
   <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
@@ -258,45 +161,51 @@ document.querySelectorAll('.tab').forEach(btn => {
 
 // Мобы
 const enemies = [
-  // Алотерра
-  { world: 'Алотерра', order: 1, name: 'Имперский полицейский', drops: ['Шлем Инспектора империи — 5%', 'Первичная материя — 7%', 'Мини-реактор — 7%'] },
-  { world: 'Алотерра', order: 2, name: 'Имперский пёс', drops: ['Ботинки Инспектора Империи — 5%', 'Сгусток неизвестной субстанции — 7%', 'Технопластина — 7%'] },
-  { world: 'Алотерра', order: 3, name: 'Автономный бот', drops: ['Штаны Инспектора Империи — 5%', 'Микросхема — 7%', 'Мини-реактор — 7%'] },
-  { world: 'Алотерра', order: 4, name: 'ΑΠΜ-ΤΑΡAH', drops: ['Кираса Инспектора Империи — 5%', 'Мини-реактор — 10%', 'Технопластина — 10%', 'Микросхема — 10%', 'Сгусток неизвестной субстанции — 10%', 'Первичная материя — 10%'] },
-  { world: 'Алотерра', order: 5, name: 'АПМ-Хищник', drops: ['Мини-реактор — 14%', 'Технопластина — 14%', 'Микросхема — 14%', 'Сгусток неизвестной субстанции — 14%', 'Первичная материя — 14%'] },
-  { world: 'Алотерра', order: 6, name: 'АПМ-Жало', drops: ['Мини-реактор — 17%', 'Технопластина — 17%', 'Микросхема — 17%', 'Сгусток неизвестной субстанции — 17%', 'Первичная материя — 17%'] },
-  // Междумирье
-  { world: 'Междумирье', order: 1, name: 'Убийца', drops: ['Шлем Странника Пустоты — 4%', 'Кристалл скинта — 6%', 'Лоскут бездны — 6%'] },
-  { world: 'Междумирье', order: 2, name: 'Призрачный олень', drops: ['Ботинки Странника Пустоты — 4%', 'Ядро междумирья — 6%', 'Сингулярная жемчужина — 6%'] },
-  { world: 'Междумирье', order: 3, name: 'Наблюдатель', drops: ['Штаны Странника Пустоты — 4%', 'Лоскут бездны — 6%', 'Осколок бездны — 6%'] },
-  { world: 'Междумирье', order: 4, name: 'Скорпион', drops: ['Кираса Странника Пустоты — 4%', 'Лоскут бездны — 8%', 'Осколок бездны — 8%', 'Сингулярная жемчужина — 8%'] },
-  { world: 'Междумирье', order: 5, name: 'Страж', drops: ['Лоскут бездны — 13%', 'Осколок бездны — 13%', 'Сингулярная жемчужина — 13%', 'Ядро междумирья — 13%', 'Кристалл скинта — 13%'] },
-  { world: 'Междумирье', order: 6, name: 'Хранитель', drops: ['Лоскут бездны — 15%', 'Осколок бездны — 15%', 'Сингулярная жемчужина — 15%', 'Ядро междумирья — 15%', 'Кристалл скинта — 15%'] }
-  // Можно добавить Миср и Даливарику аналогично
+  // ===== Даливарика =====
+  { world:'Даливарика', order:1, name:'Нежить', drops:['Шлем','Ботинки','Штаны','Кираса'] },
+  { world:'Даливарика', order:2, name:'Векс', drops:['Шлем','Ботинки','Штаны','Кираса'] },
+  { world:'Даливарика', order:3, name:'Поборник', drops:['Шлем','Ботинки','Штаны','Кираса'] },
+
+  // ===== Миср =====
+  { world:'Миср', order:1, name:'Городской разбойник', drops:['Шлем','Ботинки','Штаны','Кираса'] },
+  { world:'Миср', order:2, name:'Тоифэтун', drops:['Шлем','Ботинки','Штаны','Кираса'] },
+
+  // ===== Алотерра =====
+  { world:'Алотерра', order:1, name:'Имперский полицейский', drops:['Шлем','Ботинки','Штаны','Кираса','Мини-реактор','Технопластина','Микросхема'] },
+  { world:'Алотерра', order:2, name:'Имперский пёс', drops:['Шлем','Ботинки','Штаны','Кираса','Сгусток неизвестной субстанции','Технопластина'] },
+  { world:'Алотерра', order:3, name:'Автономный бот', drops:['Шлем','Ботинки','Штаны','Кираса','Микросхема','Мини-реактор'] },
+
+  // ===== Междумирье =====
+  { world:'Междумирье', order:1, name:'Убийца', drops:['Шлем','Ботинки','Штаны','Кираса','Кристалл скинта','Лоскут бездны'] },
+  { world:'Междумирье', order:2, name:'Призрачный олень', drops:['Шлем','Ботинки','Штаны','Кираса','Ядро междумирья','Сингулярная жемчужина'] },
+  { world:'Междумирье', order:3, name:'Наблюдатель', drops:['Шлем','Ботинки','Штаны','Кираса','Лоскут бездны','Осколок бездны'] },
+  { world:'Междумирье', order:4, name:'Скорпион', drops:['Шлем','Ботинки','Штаны','Кираса','Лоскут бездны','Осколок бездны','Сингулярная жемчужина'] },
+  { world:'Междумирье', order:5, name:'Страж', drops:['Лоскут бездны','Осколок бездны','Сингулярная жемчужина','Ядро междумирья','Кристалл скинта'] },
+  { world:'Междумирье', order:6, name:'Хранитель', drops:['Лоскут бездны','Осколок бездны','Сингулярная жемчужина','Ядро междумирья','Кристалл скинта'] }
 ];
 
 const cards = document.getElementById('cards');
 const search = document.getElementById('search');
 const worldFilter = document.getElementById('worldFilter');
 
-function renderMobs() {
+function renderMobs(){
   const q = search.value.toLowerCase();
   const w = worldFilter.value;
   cards.innerHTML = '';
-  enemies.filter(e => (w === 'all' || e.world === w))
+  enemies.filter(e => (w==='all'||e.world===w))
          .filter(e => e.name.toLowerCase().includes(q))
-         .forEach(e => {
-           const div = document.createElement('div');
-           div.className = 'card';
-           div.innerHTML = `<h3>${e.order}. ${e.name}</h3>
-             <div class="world">Мир: ${e.world}</div>
-             ${e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('')}`;
+         .forEach(e=>{
+           const div=document.createElement('div');
+           div.className='card';
+           div.innerHTML=`<h3>${e.order}. ${e.name}</h3>
+           <div class="world">Мир: ${e.world}</div>
+           ${e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('')}`;
            cards.appendChild(div);
          });
 }
 
-search.addEventListener('input', renderMobs);
-worldFilter.addEventListener('change', renderMobs);
+search.addEventListener('input',renderMobs);
+worldFilter.addEventListener('change',renderMobs);
 renderMobs();
 </script>
 </body>
