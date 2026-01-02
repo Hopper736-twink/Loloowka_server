@@ -109,13 +109,7 @@ footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-
   <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
   <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
 </footer><script>
-document.querySelectorAll('.tab').forEach(btn=>{btn.addEventListener('click',()=>{
-document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-btn.classList.add('active');
-document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-})});
-</script><script>
+// Вкладки
 document.querySelectorAll('.tab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
@@ -125,5 +119,42 @@ document.querySelectorAll('.tab').forEach(btn => {
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
   });
 });
-</script></body>
-</html>
+
+// Мобы
+const enemies = [
+  { world: 'Даливарика', order: 1, name: 'Нежить', drops: ['Свиток «Шлем Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Сломанная кость — 10%'] },
+  { world: 'Даливарика', order: 2, name: 'Векс', drops: ['Свиток «Ботинки Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Фрагмент папируса — 10%'] },
+  { world: 'Даливарика', order: 3, name: 'Поборник', drops: ['Свиток «Штаны Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Камушек — 10%'] },
+  { world: 'Даливарика', order: 4, name: 'Природный элементаль', drops: ['Свиток «Кираса Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Вороной герб — 10%', 'Сломанная кость — 10%', 'Фрагмент папируса — 10%', 'Камушек — 10%'] },
+  { world: 'Даливарика', order: 5, name: 'Гримуар', drops: ['Все свитки брони', 'Осколок чёрного металла — 14%', 'Вороной герб — 14%', 'Сломанная кость — 14%', 'Фрагмент папируса — 14%', 'Камушек — 14%'] },
+  { world: 'Даливарика', order: 6, name: 'Спектральный некромант', drops: ['Все свитки брони', 'Осколок чёрного металла — 20%', 'Вороной герб — 20%', 'Сломанная кость — 20%', 'Фрагмент папируса — 20%', 'Камушек — 20%'] },
+  { world: 'Миср', order: 1, name: 'Городской разбойник', drops: ['Свиток «Шлем Повелителя Песков» — 6%', 'Песчинка всевластия — 10%', 'Рунная плита — 10%'] },
+  { world: 'Миср', order: 2, name: 'Тоифэтун', drops: ['Свиток «Ботинки Повелителя Песков» — 6%', 'Сердце Джинна — 10%', 'Аметистовый кристалл — 10%'] },
+  { world: 'Миср', order: 3, name: 'Кристаллический жук', drops: ['Свиток «Штаны Повелителя Песков» — 6%', 'Песчинка всевластия — 10%', 'Клочок шёлка — 10%'] },
+  { world: 'Миср', order: 4, name: 'Пещерный скорпион', drops: ['Свиток «Кираса Повелителя Песков» — 6%', 'Сердце Джинна — 10%', 'Песчинка всевластия — 10%', 'Аметистовый кристалл — 10%', 'Рунная плита — 10%', 'Клочок шёлка — 10%'] },
+  { world: 'Миср', order: 5, name: 'Чудовище', drops: ['Все свитки брони', 'Сердце Джинна — 14%', 'Песчинка всевластия — 14%', 'Аметистовый кристалл — 14%', 'Рунная плита — 14%', 'Клочок шёлка — 14%'] },
+  { world: 'Миср', order: 6, name: 'Отверженный', drops: ['Все свитки брони', 'Сердце Джинна — 20%', 'Песчинка всевластия — 20%', 'Аметистовый кристалл — 20%', 'Рунная плита — 20%', 'Клочок шёлка — 20%'] }
+];
+
+const cards = document.getElementById('cards');
+const search = document.getElementById('search');
+const worldFilter = document.getElementById('worldFilter');
+
+function renderMobs() {
+  const q = search.value.toLowerCase();
+  const w = worldFilter.value;
+  cards.innerHTML = '';
+  enemies.filter(e => (w === 'all' || e.world === w))
+         .filter(e => e.name.toLowerCase().includes(q))
+         .forEach(e => {
+           const div = document.createElement('div');
+           div.className = 'card';
+           div.innerHTML = `<h3>${e.order}. ${e.name}</h3><div class="world">Мир: ${e.world}</div>${e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('')}`;
+           cards.appendChild(div);
+         });
+}
+
+search.addEventListener('input', renderMobs);
+worldFilter.addEventListener('change', renderMobs);
+renderMobs();
+</script>
