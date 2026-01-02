@@ -370,15 +370,15 @@ let tabSwitchCount = Number(localStorage.getItem('hero_tab_switch_count') || 0);
 let settingsOpenCount = Number(localStorage.getItem('hero_settings_open_count') || 0);
 
 /* ========== Codes mapping (в JS only) ========== */
-const codeMap Вороной': 
-  'lolofan': 'a41',
-  'supported': 'a42',
-  'hopper736: 'a43',
-  'test': 'a44',
-  '99317': 'a45'
+const codeMap = {
+  'Hopper736': 'a41',
+  'test': 'a42',
+  'supported': 'a43',
+  '99317': 'a44',
+  'lolofan': 'a45'
 };
-const adminCode = 'code hop'; // -> a46
-
+const adminCode = 'Hopper736'; // код для достижения a46
+  
 /* ========== DOM refs ========== */
 const tabs = document.querySelectorAll('.tab');
 const openSettingsBtn = document.getElementById('openSettings');
