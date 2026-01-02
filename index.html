@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,13 +19,16 @@ body{ margin:0; background:radial-gradient(circle at top,#0a1020,#05070a 60%); c
 
 header{ background:#05070a; border-bottom:3px solid var(--border); padding:20px; text-align:center; }
 
-header h1{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:22px; margin:0; } .subtitle{color:var(--muted);font-size:13px;margin-top:6px;font-weight:700} .warning{color:#ff5252;font-size:12px;margin-top:6px;font-weight:700}
+header h1{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:22px; margin:0; } 
+.subtitle{color:var(--muted);font-size:13px;margin-top:6px;font-weight:700} 
+.warning{color:#ff5252;font-size:12px;margin-top:6px;font-weight:700}
 
 .tabs{ display:flex; justify-content:center; gap:12px; margin-top:16px; flex-wrap:wrap; }
 
 .tab{ font-family:'Press Start 2P',monospace; background:var(--card); border:2px solid var(--border); color:var(--text); padding:10px 16px; border-radius:12px; cursor:pointer; transition:.2s; font-weight:700; }
 
-.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6)} .tab.active{ background:rgba(30,136,255,.15); box-shadow:0 0 18px rgba(30,136,255,.8); }
+.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6)} 
+.tab.active{ background:rgba(30,136,255,.15); box-shadow:0 0 18px rgba(30,136,255,.8); }
 
 main{max-width:1300px;margin:0 auto;padding:26px}
 
@@ -38,26 +42,33 @@ input,select{ background:#070b14; border:2px solid var(--border); color:var(--te
 
 .card h3, .item-card h3, .prestige-card h3{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:14px; margin:0 0 14px 0; font-weight:700; }
 
-.world{color:var(--muted);font-size:13px;margin-bottom:10px;font-weight:700} .stat{font-size:14px;margin-bottom:6px;color:var(--text);font-weight:700}
+.world{color:var(--muted);font-size:13px;margin-bottom:10px;font-weight:700} 
+.stat{font-size:14px;margin-bottom:6px;color:var(--text);font-weight:700}
 
 .items-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:22px; margin-top:22px; }
 
 section h2{ font-family:'Press Start 2P',monospace; color:var(--accent); margin-bottom:18px; font-weight:700; }
 
-footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-align:center; color:var(--muted); font-weight:700; } footer a{color:var(--accent);text-decoration:none;font-weight:700}
+footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-align:center; color:var(--muted); font-weight:700; } 
+footer a{color:var(--accent);text-decoration:none;font-weight:700}
 
-.tab-content{display:none} .tab-content.active{display:block} </style>
-
+.tab-content{display:none} 
+.tab-content.active{display:block} 
+  </style>
 </head>
-<body><header>
+<body>
+<header>
   <h1>Путь героя — фан-справочник</h1>
   <div class="subtitle">Сервер Лололошки • Характеристики и механики</div>
-  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>  <nav class="tabs">
+  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>  
+  <nav class="tabs">
     <button class="tab active" data-tab="mobs">Мобы</button>
     <button class="tab" data-tab="items">Предметы</button>
     <button class="tab" data-tab="prestige">Престиж</button>
   </nav>
-</header><main>
+</header>
+
+<main>
   <section id="tab-mobs" class="tab-content active">
     <div class="controls">
       <input id="search" placeholder="Поиск по имени…" />
@@ -65,10 +76,13 @@ footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-
         <option value="all">Все миры</option>
         <option value="Даливарика">Даливарика</option>
         <option value="Миср">Миср</option>
+        <option value="Междумирье">Междумирье</option>
       </select>
     </div>
     <div id="cards" class="grid"></div>
-  </section>  <section id="tab-items" class="tab-content">
+  </section>  
+
+  <section id="tab-items" class="tab-content">
     <h2>Предметы</h2>
     <div class="items-grid">
       <div class="item-card"><h3>Свитки брони</h3><p>Используются для получения частей брони соответствующего сета.</p></div>
@@ -78,7 +92,9 @@ footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-
       <div class="item-card"><h3>Рунная плита</h3><p>Древний артефакт.</p></div>
       <div class="item-card"><h3>Клочок шёлка</h3><p>Обычный материал.</p></div>
     </div>
-  </section>  <section id="tab-prestige" class="tab-content">
+  </section>  
+
+  <section id="tab-prestige" class="tab-content">
     <h2>Престиж</h2>
     <div class="prestige-card">
       <h3>1 уровень престижа</h3>
@@ -91,30 +107,48 @@ footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-
         <li>Золото: 1x → 2.9x</li>
         <li>Опыт: 1x → 2.9x</li>
       </ul>
-      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p><h3>2 уровень престижа</h3>
-  <ul>
-    <li>Урон: 1.15x → 1.32x</li>
-    <li>Защита: 1.15x → 1.31x</li>
-    <li>Здоровье: 1.15x → 1.32x</li>
-    <li>Регенерация: 1.16x → 1.33x</li>
-    <li>Скорость: 1x → 1x</li>
-    <li>Золото: 2.9x → 8.41x</li>
-    <li>Опыт: 2.9x → 8.41x</li>
-  </ul>
-  <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
-</div>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
 
+      <h3>2 уровень престижа</h3>
+      <ul>
+        <li>Урон: 1.15x → 1.32x</li>
+        <li>Защита: 1.15x → 1.31x</li>
+        <li>Здоровье: 1.15x → 1.32x</li>
+        <li>Регенерация: 1.16x → 1.33x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 2.9x → 8.41x</li>
+        <li>Опыт: 2.9x → 8.41x</li>
+      </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+
+      <h3>3 уровень престижа</h3>
+      <ul>
+        <li>Урон: 1.32x → 1.52x</li>
+        <li>Защита: 1.31x → 1.5x</li>
+        <li>Здоровье: 1.32x → 1.52x</li>
+        <li>Регенерация: 1.33x → 1.54x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 8.41x → 24.39x</li>
+        <li>Опыт: 8.41x → 24.39x</li>
+      </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+
+      <p style="margin-top:12px; font-style:italic; color:var(--muted)">В будущем планируются уровни 4 и далее с ещё более сильными бонусами.</p>
+    </div>
   </section>
-</main><footer>
+</main>
+
+<footer>
   <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
   <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
-</footer><script>
+</footer>
+
+<script>
 // Вкладки
 document.querySelectorAll('.tab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
     btn.classList.add('active');
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
   });
@@ -122,40 +156,62 @@ document.querySelectorAll('.tab').forEach(btn => {
 
 // Мобы
 const enemies = [
+  // ===== Даливарика =====
   { world: 'Даливарика', order: 1, name: 'Нежить', drops: ['Свиток «Шлем Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Сломанная кость — 10%'] },
   { world: 'Даливарика', order: 2, name: 'Векс', drops: ['Свиток «Ботинки Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Фрагмент папируса — 10%'] },
   { world: 'Даливарика', order: 3, name: 'Поборник', drops: ['Свиток «Штаны Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Камушек — 10%'] },
   { world: 'Даливарика', order: 4, name: 'Природный элементаль', drops: ['Свиток «Кираса Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Вороной герб — 10%', 'Сломанная кость — 10%', 'Фрагмент папируса — 10%', 'Камушек — 10%'] },
-  { world: 'Даливарика', order: 5, name: 'Гримуар', drops: ['Все свитки брони', 'Осколок чёрного металла — 14%', 'Вороной герб — 14%', 'Сломанная кость — 14%', 'Фрагмент папируса — 14%', 'Камушек — 14%'] },
-  { world: 'Даливарика', order: 6, name: 'Спектральный некромант', drops: ['Все свитки брони', 'Осколок чёрного металла — 20%', 'Вороной герб — 20%', 'Сломанная кость — 20%', 'Фрагмент папируса — 20%', 'Камушек — 20%'] },
-  { world: 'Миср', order: 1, name: 'Городской разбойник', drops: ['Свиток «Шлем Повелителя Песков» — 6%', 'Песчинка всевластия — 10%', 'Рунная плита — 10%'] },
+  { world: 'Даливарика', order: 5, name: 'Гримуар', drops: ['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного металла — 14%', 'Вороной герб — 14%', 'Сломанная кость — 14%', 'Фрагмент папируса — 14%', 'Камушек — 14%'] },
+  { world: 'Даливарика', order: 6, name: 'Спектральный некромант', drops: ['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного металла — 20%', 'Вороной герб — 20%', 'Сломанная кость — 20%', 'Фрагмент папируса — 20%', 'Камушек — 20%'] },
+  // ===== Миср =====
+  { world: 'Миср', order: 1, name: 'Городской разбойник', drops: ['Свиток «Шлем Повелителя Песков» — 6%', 'Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»','Песчинка всевластия — 10%', 'Рунная плита — 10%'] },
   { world: 'Миср', order: 2, name: 'Тоифэтун', drops: ['Свиток «Ботинки Повелителя Песков» — 6%', 'Сердце Джинна — 10%', 'Аметистовый кристалл — 10%'] },
   { world: 'Миср', order: 3, name: 'Кристаллический жук', drops: ['Свиток «Штаны Повелителя Песков» — 6%', 'Песчинка всевластия — 10%', 'Клочок шёлка — 10%'] },
   { world: 'Миср', order: 4, name: 'Пещерный скорпион', drops: ['Свиток «Кираса Повелителя Песков» — 6%', 'Сердце Джинна — 10%', 'Песчинка всевластия — 10%', 'Аметистовый кристалл — 10%', 'Рунная плита — 10%', 'Клочок шёлка — 10%'] },
-  { world: 'Миср', order: 5, name: 'Чудовище', drops: ['Все свитки брони', 'Сердце Джинна — 14%', 'Песчинка всевластия — 14%', 'Аметистовый кристалл — 14%', 'Рунная плита — 14%', 'Клочок шёлка — 14%'] },
-  { world: 'Миср', order: 6, name: 'Отверженный', drops: ['Все свитки брони', 'Сердце Джинна — 20%', 'Песчинка всевластия — 20%', 'Аметистовый кристалл — 20%', 'Рунная плита — 20%', 'Клочок шёлка — 20%'] }
-];
-
-const cards = document.getElementById('cards');
-const search = document.getElementById('search');
-const worldFilter = document.getElementById('worldFilter');
-
-function renderMobs() {
-  const q = search.value.toLowerCase();
-  const w = worldFilter.value;
-  cards.innerHTML = '';
-  enemies.filter(e => (w === 'all' || e.world === w))
-         .filter(e => e.name.toLowerCase().includes(q))
-         .forEach(e => {
-           const div = document.createElement('div');
-           div.className = 'card';
-           div.innerHTML = `<h3>${e.order}. ${e.name}</h3><div class="world">Мир: ${e.world}</div>${e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('')}`;
-           cards.appendChild(div);
-         });
-}
-
-search.addEventListener('input', renderMobs);
-worldFilter.addEventListener('change', renderMobs);
-renderMobs();
-</script></body>
-</html>
+  { world: 'Миср', order: 5, name: 'Чудовище', drops: ['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»','Сердце Джинна — 14%', 'Песчинка всевластия — 14%', 'Аметистовый кристалл — 14%', 'Рунная плита — 14%', 'Клочок шёлка — 14%'] },
+  { world: 'Миср', order: 6, name: 'Отверженный', drops: ['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»','Сердце Джинна — 20%', 'Песчинка всевластия — 20%', 'Аметистовый кристалл — 20%', 'Рунная плита — 20%', 'Клочок шёлка — 20%'] },
+  // ===== АЛОТЕРРА =====
+{ world: 'Алотерра', order: 1, name: 'Имперский полицейский', drops: [
+  'Свиток "Шлем Инспектора империи" — 5%',
+  'Первичная материя — 7%',
+  'Мини-реактор — 7%'
+] },
+{ world: 'Алотерра', order: 2, name: 'Имперский пёс', drops: [
+  'Свиток "Ботинки Инспектора Империи" — 5%',
+  'Сгусток неизвестной субстанции — 7%',
+  'Технопластина — 7%'
+] },
+{ world: 'Алотерра', order: 3, name: 'Автономный бот', drops: [
+  'Свиток "Штаны Инспектора Империи" — 5%',
+  'Микросхема — 7%',
+  'Мини-реактор — 7%'
+] },
+{ world: 'Алотерра', order: 4, name: 'ΑΠΜ-ΤΑΡAH', drops: [
+  'Свиток "Кираса Инспектора Империи" — 5%',
+  'Мини-реактор — 10%',
+  'Технопластина — 10%',
+  'Микросхема — 10%',
+  'Сгусток неизвестной субстанции — 10%',
+  'Первичная Материя — 10%'
+] },
+{ world: 'Алотерра', order: 5, name: 'АПМ-ХИЩНИК', drops: [
+  'Мини-реактор — 14%',
+  'Технопластина — 14%',
+  'Микросхема — 14%',
+  'Сгусток неизвестной субстанции — 14%',
+  'Первичная Материя — 14%'
+] },
+{ world: 'Алотерра', order: 6, name: 'АПМ-ЖАЛО', drops: [
+  'Мини-реактор — 17%',
+  'Технопластина — 17%',
+  'Микросхема — 17%',
+  'Сгусток неизвестной субстанции — 17%',
+  'Первичная Материя — 17%'
+] }
+  // ===== Междумирье =====
+  { world: 'Междумирье', order: 1, name: 'Убийца', drops: ['Свиток «Шлем Странника Пустоты» — 4%', 'Кристалл скинта — 6%', 'Лоскут бездны — 6%'] },
+  { world: 'Междумирье', order: 2, name: 'Призрачный олень Междумирья', drops: ['Свиток «Ботинки Странника Пустоты» — 4%', 'Ядро междумирья — 6%', 'Сингулярная жемчужина — 6%'] },
+  { world: 'Междумирье', order: 3, name: 'Наблюдатель Междумирья', drops: ['Свиток «Штаны Странника Пустоты» — 4%', 'Лоскут бездны — 6%', 'Осколок бездны — 6%'] },
+  { world: 'Междумирье', order: 4, name: 'Скорпион Междумирья', drops: ['Свиток «Кираса Странника Пустоты» — 4%', 'Лоскут бездны — 8%', 'Осколок бездны — 8%', 'Сингулярная жемчужина — 8%'] },
+  { world: 'Междумирье', order: 5, name: 'Скорпион Междумирья (вариант 2)', drops: ['Лоскут бездны — 8%', 'Сингулярная жемчужина — 8%', 'Ядро междумирья — 8%', 'Кристалл скинта — 8%'] },
+  { world: 'Междумирье', order: 6, name: 'Страж Междумирья', drops
