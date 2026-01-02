@@ -1,126 +1,84 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Путь героя — фан-справочник</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@500;700&display=swap" rel="stylesheet">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Путь героя — фан-справочник</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <style>
 :root{
   --bg:#05070a;
   --card:#0b1220;
   --border:#1e88ff;
   --accent:#ff9800;
-  --text:#ff9800;
+  --text:#e8f0ff;
   --muted:#9fb4d8;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:radial-gradient(circle at top,#0a1020,#05070a 60%);
-  color:var(--text);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
-  line-height:1.6;
-  font-weight:700;
-}
-header{
-  background:#05070a;
-  border-bottom:3px solid var(--border);
-  padding:18px;
-  text-align:center;
-}
-header h1{
-  font-family:'Press Start 2P',monospace;
-  color:var(--accent);
-  font-size:20px;
-  margin:0;
-}
-.header-row{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  justify-content:center;
-  margin-top:12px;
-  flex-wrap:wrap;
-}
-.subtitle{color:var(--muted);font-size:12px;margin-top:6px;font-weight:700}
+
+body{ margin:0; background:radial-gradient(circle at top,#0a1020,#05070a 60%); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; line-height:1.6; font-weight:700; }
+
+header{ background:#05070a; border-bottom:3px solid var(--border); padding:20px; text-align:center; }
+
+header h1{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:22px; margin:0; } 
+.subtitle{color:var(--muted);font-size:13px;margin-top:6px;font-weight:700} 
 .warning{color:#ff5252;font-size:12px;margin-top:6px;font-weight:700}
 
-/* tabs */
-.tabs{ display:flex; justify-content:center; gap:12px; margin-top:12px; flex-wrap:wrap; }
-.tab{ font-family:'Press Start 2P',monospace; background:var(--card); border:2px solid var(--border); color:var(--text); padding:8px 14px; border-radius:12px; cursor:pointer; transition:.15s; font-weight:700; }
-.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.25)}
-.tab.active{ background:rgba(30,136,255,.12); box-shadow:0 0 12px rgba(30,136,255,.35); color:var(--accent) }
+.tabs{ display:flex; justify-content:center; gap:12px; margin-top:16px; flex-wrap:wrap; }
 
-/* settings button */
-.settingsBtn{ background:var(--card); border:2px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:700; }
-.settingsPanel{ display:none; max-width:1100px; margin:12px auto 0; padding:12px; border:2px solid var(--border); border-radius:12px; background:linear-gradient(180deg,#061529,#05101a); color:var(--muted); font-weight:700; }
-.settingsPanel.active{ display:block; }
+.tab{ font-family:'Press Start 2P',monospace; background:var(--card); border:2px solid var(--border); color:var(--text); padding:10px 16px; border-radius:12px; cursor:pointer; transition:.2s; font-weight:700; }
 
-/* main */
-main{ max-width:1300px; margin:16px auto; padding:14px; }
+.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6)} 
+.tab.active{ background:rgba(30,136,255,.15); box-shadow:0 0 18px rgba(30,136,255,.8); }
 
-/* controls */
-.controls{ display:flex; gap:12px; justify-content:center; margin-bottom:18px; flex-wrap:wrap; }
+main{max-width:1300px;margin:0 auto;padding:26px}
+
+.controls{ display:flex; gap:12px; justify-content:center; margin-bottom:26px; flex-wrap:wrap; }
+
 input,select{ background:#070b14; border:2px solid var(--border); color:var(--text); padding:10px 14px; border-radius:12px; font-size:14px; font-weight:700; }
 
-/* grid/cards */
-.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; }
-.card, .item-card, .prestige-card{ background:linear-gradient(180deg,#0d162a,var(--card)); border:2px solid var(--border); border-radius:14px; padding:16px; box-shadow:0 8px 25px rgba(0,0,0,0.45); font-weight:700; }
-.card h3, .item-card h3, .prestige-card h3{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:13px; margin:0 0 8px 0; font-weight:700; }
-.world{ font-size:12px; color:var(--muted); margin-bottom:8px; }
-.stat{ font-size:13px; margin-bottom:6px; color:var(--text); font-weight:700; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
 
-/* fan text */
-.fan-desc{ margin-top:10px; font-size:12px; color:var(--muted); font-weight:600; }
-.fan-secret{ margin-top:6px; font-size:12px; color:#cbe9ff; font-weight:700; }
+.card, .item-card, .prestige-card, .achievement-card{ background:linear-gradient(180deg,#0d162a,var(--card)); border:2px solid var(--border); border-radius:18px; padding:22px; box-shadow:0 0 20px rgba(30,136,255,.15); font-weight:700; }
 
-/* items grid */
-.items-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; margin-top:10px; }
+.card h3, .item-card h3, .prestige-card h3, .achievement-card h3{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:14px; margin:0 0 14px 0; font-weight:700; }
 
-/* footer */
-footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-align:center; color:var(--muted); font-weight:700; }
+.world{color:var(--muted);font-size:13px;margin-bottom:10px;font-weight:700} 
+.stat{font-size:14px;margin-bottom:6px;color:var(--text);font-weight:700}
 
-/* small helpers */
-.disclaimer{ font-size:12px; color:#ffd6a8; margin-top:8px; font-weight:700; }
-</style>
+.items-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:22px; margin-top:22px; }
+
+section h2{ font-family:'Press Start 2P',monospace; color:var(--accent); margin-bottom:18px; font-weight:700; }
+
+footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-align:center; color:var(--muted); font-weight:700; } 
+footer a{color:var(--accent);text-decoration:none;font-weight:700}
+
+.tab-content{display:none} 
+.tab-content.active{display:block} 
+
+.toggle-label{ display:flex; align-items:center; gap:10px; cursor:pointer; margin-bottom:20px; font-weight:700;}
+.toggle-label input{ cursor:pointer;}
+.note{font-size:12px;color:var(--muted);margin-top:6px;}
+  </style>
 </head>
 <body>
-
 <header>
   <h1>Путь героя — фан-справочник</h1>
-  <div class="subtitle">Сервер Лололошки • Мобы, предметы, престижа</div>
-  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>
-
-  <div class="header-row">
-    <nav class="tabs" role="navigation" aria-label="Вкладки">
-      <button class="tab active" data-tab="mobs">Мобы</button>
-      <button class="tab" data-tab="items">Предметы</button>
-      <button class="tab" data-tab="prestige">Престиж</button>
-    </nav>
-
-    <button id="openSettings" class="settingsBtn" title="Настройки">⚙ Настройки</button>
-  </div>
-
-  <div id="settingsPanel" class="settingsPanel" aria-hidden="true">
-    <label style="display:flex;align-items:center;gap:10px;">
-      <input id="fanModeToggle" type="checkbox" style="transform:scale(1.1);"/>
-      <span>Включить режим «Тайны мира» (фан-режим)</span>
-    </label>
-
-    <div class="disclaimer">
-      Внимание: при включённом режиме показываются фан-описания, сюжеты и секреты, созданные игроками. Это — не официальный лор сервера.
-    </div>
-    <div style="margin-top:10px;color:var(--muted)">Режим сохраняется в браузере. Включай, чтобы увидеть сюжетные подсказки и секреты для каждого моба.</div>
-  </div>
+  <div class="subtitle">Сервер Лололошки • Характеристики и механики</div>
+  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>  
+  <nav class="tabs">
+    <button class="tab active" data-tab="mobs">Мобы</button>
+    <button class="tab" data-tab="items">Предметы</button>
+    <button class="tab" data-tab="prestige">Престиж</button>
+    <button class="tab" data-tab="achievements">Достижения</button>
+  </nav>
 </header>
-
 <main>
-  <!-- MOBS TAB -->
   <section id="tab-mobs" class="tab-content active">
+    <div class="toggle-label"><input type="checkbox" id="fanMode"> Включить фан-режим (фан-описания, секреты)</div>
     <div class="controls">
       <input id="search" placeholder="Поиск по имени…" />
-      <select id="worldFilter" aria-label="Выбор мира">
+      <select id="worldFilter">
         <option value="all">Все миры</option>
         <option value="Даливарика">Даливарика</option>
         <option value="Миср">Миср</option>
@@ -128,19 +86,14 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
         <option value="Междумирье">Междумирье</option>
       </select>
     </div>
+    <div id="cards" class="grid"></div>
+  </section>  
 
-    <div id="cards" class="grid" aria-live="polite"></div>
-  </section>
-
-  <!-- ITEMS TAB -->
   <section id="tab-items" class="tab-content">
     <h2>Предметы</h2>
-    <div class="items-grid" id="itemGrid">
-      <!-- Items will be rendered by JS -->
-    </div>
-  </section>
+    <div class="items-grid" id="itemsGrid"></div>
+  </section>  
 
-  <!-- PRESTIGE TAB -->
   <section id="tab-prestige" class="tab-content">
     <h2>Престиж</h2>
     <div class="prestige-card">
@@ -154,6 +107,7 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
         <li>Золото: 1x → 2.9x</li>
         <li>Опыт: 1x → 2.9x</li>
       </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
 
       <h3>2 уровень престижа</h3>
       <ul>
@@ -165,6 +119,7 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
         <li>Золото: 2.9x → 8.41x</li>
         <li>Опыт: 2.9x → 8.41x</li>
       </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
 
       <h3>3 уровень престижа</h3>
       <ul>
@@ -176,194 +131,61 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
         <li>Золото: 8.41x → 24.39x</li>
         <li>Опыт: 8.41x → 24.39x</li>
       </ul>
-
-      <p style="margin-top:10px;color:var(--muted)">В будущем будут добавлены уровни 4 и далее с новыми бонусами.</p>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+      <p>В будущем будут добавлены уровни 4 и выше.</p>
     </div>
+  </section>
+
+  <section id="tab-achievements" class="tab-content">
+    <h2>Достижения</h2>
+    <div class="items-grid" id="achievementsGrid"></div>
   </section>
 </main>
 
 <footer>
-  <div>Есть доп. информация или ошибки — писать в Telegram-бота</div>
+  <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
   <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
 </footer>
 
 <script>
-/* =========================
-   Data: mobs, items, lore
-   ========================= */
-const enemies = [
-  // ===== Даливарика (6) =====
-  { world:'Даливарика', order:1, name:'Нежить', drops:['Свиток «Шлем Тёмного Рыцаря» — 6%','Вороной герб — 10%','Сломанная кость — 10%'] },
-  { world:'Даливарика', order:2, name:'Векс', drops:['Свиток «Ботинки Тёмного Рыцаря» — 6%','Осколок чёрного металла — 10%','Фрагмент папируса — 10%'] },
-  { world:'Даливарика', order:3, name:'Поборник', drops:['Свиток «Штаны Тёмного Рыцаря» — 6%','Вороной герб — 10%','Камушек — 10%'] },
-  { world:'Даливарика', order:4, name:'Природный элементаль', drops:['Свиток «Кираса Тёмного Рыцаря» — 6%','Осколок чёрного металла — 10%','Вороной герб — 10%','Сломанная кость — 10%','Фрагмент папируса — 10%','Камушек — 10%'] },
-  { world:'Даливарика', order:5, name:'Гримуар', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного металла — 14%','Вороной герб — 14%','Сломанная кость — 14%','Фрагмент папируса — 14%','Камушек — 14%'] },
-  { world:'Даливарика', order:6, name:'Спектральный некромант', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного металла — 20%','Вороной герб — 20%','Сломанная кость — 20%','Фрагмент папируса — 20%','Камушек — 20%'] },
-
-  // ===== Миср (6) =====
-  { world:'Миср', order:1, name:'Городской разбойник', drops:['Свиток «Шлем Повелителя Песков» — 6%','Песчинка всевластия — 10%','Рунная плита — 10%'] },
-  { world:'Миср', order:2, name:'Тоифэтун', drops:['Свиток «Ботинки Повелителя Песков» — 6%','Сердце Джинна — 10%','Аметистовый кристалл — 10%'] },
-  { world:'Миср', order:3, name:'Кристаллический жук', drops:['Свиток «Штаны Повелителя Песков» — 6%','Песчинка всевластия — 10%','Клочок шёлка — 10%'] },
-  { world:'Миср', order:4, name:'Пещерный скорпион', drops:['Свиток «Кираса Повелителя Песков» — 6%','Сердце Джинна — 10%','Песчинка всевластия — 10%','Аметистовый кристалл — 10%','Рунная плита — 10%','Клочок шёлка — 10%'] },
-  { world:'Миср', order:5, name:'Чудовище', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»','Сердце Джинна — 14%','Песчинка всевластия — 14%','Аметистовый кристалл — 14%','Рунная плита — 14%','Клочок шёлка — 14%'] },
-  { world:'Миср', order:6, name:'Отверженный', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»','Сердце Джинна — 20%','Песчинка всевластия — 20%','Аметистовый кристалл — 20%','Рунная плита — 20%','Клочок шёлка — 20%'] },
-
-  // ===== Алотерра (6) =====
-  { world:'Алотерра', order:1, name:'Имперский полицейский', drops:['Свиток «Шлем Инспектора империи» — 5%','Первичная материя — 7%','Мини-реактор — 7%'] },
-  { world:'Алотерра', order:2, name:'Имперский пёс', drops:['Свиток «Ботинки Инспектора Империи» — 5%','Сгусток неизвестной субстанции — 7%','Технопластина — 7%'] },
-  { world:'Алотерра', order:3, name:'Автономный бот', drops:['Свиток «Штаны Инспектора Империи» — 5%','Микросхема — 7%','Мини-реактор — 7%'] },
-  { world:'Алотерра', order:4, name:'ΑΠΜ-ΤΑΡAH', drops:['Свиток «Кираса Инспектора Империи» — 5%','Мини-реактор — 10%','Технопластина — 10%','Микросхема — 10%','Сгусток неизвестной субстанции — 10%','Первичная Материя — 10%'] },
-  { world:'Алотерра', order:5, name:'АПМ-ХИЩНИК', drops:['Мини-реактор — 14%','Технопластина — 14%','Микросхема — 14%','Сгусток неизвестной субстанции — 14%','Первичная Материя — 14%'] },
-  { world:'Алотерра', order:6, name:'АПМ-ЖАЛО', drops:['Мини-реактор — 17%','Технопластина — 17%','Микросхема — 17%','Сгусток неизвестной субстанции — 17%','Первичная Материя — 17%'] },
-
-  // ===== Междумирье (6) =====
-  { world:'Междумирье', order:1, name:'Убийца', drops:['Свиток «Шлем Странника Пустоты» — 4%','Кристалл скинта — 6%','Лоскут бездны — 6%'] },
-  { world:'Междумирье', order:2, name:'Призрачный олень', drops:['Свиток «Ботинки Странника Пустоты» — 4%','Ядро междумирья — 6%','Сингулярная жемчужина — 6%'] },
-  { world:'Междумирье', order:3, name:'Наблюдатель', drops:['Свиток «Штаны Странника Пустоты» — 4%','Лоскут бездны — 6%','Осколок бездны — 6%'] },
-  { world:'Междумирье', order:4, name:'Скорпион', drops:['Свиток «Кираса Странника Пустоты» — 4%','Лоскут бездны — 8%','Осколок бездны — 8%','Сингулярная жемчужина — 8%'] },
-  { world:'Междумирье', order:5, name:'Страж', drops:['Лоскут бездны — 13%','Осколок бездны — 13%','Сингулярная жемчужина — 13%','Ядро междумирья — 13%','Кристалл скинта — 13%'] },
-  { world:'Междумирье', order:6, name:'Хранитель', drops:['Лоскут бездны — 15%','Осколок бездны — 15%','Сингулярная жемчужина — 15%','Ядро междумирья — 15%','Кристалл скинта — 15%'] }
-];
-
-// Items list (shown on items tab)
-const items = [
-  'Свиток «Шлем»','Свиток «Ботинки»','Свиток «Штаны»','Свиток «Кираса»',
-  'Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции',
-  'Первичная материя','Кристалл скинта','Лоскут бездны','Осколок бездны',
-  'Ядро междумирья','Сингулярная жемчужина','Песчинка всевластия','Сердце Джинна',
-  'Аметистовый кристалл','Рунная плита','Клочок шёлка'
-];
-
-// Fan descriptions & secrets (short).
-// These are fan-made notes shown only when фан-режим включён.
-const fan = {
-  'Нежить': {desc:'Древнее создание из окраин Даливарики.', secret:'Считается, что у нежити можно найти старую печать в 0.5% случаев.'},
-  'Векс': {desc:'Сумрачный страж из руин.', secret:'Любит прятать папирусы у корней.'},
-  'Поборник': {desc:'Воитель, оставшийся от старых войн.', secret:'Если бить в голову — шанс сброса древней монеты чуть выше.'},
-  'Природный элементаль': {desc:'Духи земли и корней.', secret:'Осторожно: при дождливой погоде их сила растёт.'},
-  'Гримуар': {desc:'Хранитель забытых свитков.', secret:'Иногда выпадает сразу полный сет свитков.'},
-  'Спектральный некромант': {desc:'Проводник между мирами и тенями.', secret:'В ночные часы шанс на редкие дропы увеличен.'},
-
-  'Городской разбойник': {desc:'Мелкий вор из песчаных кварталов.', secret:'Остерегайся засады у рынка.'},
-  'Тоифэтун': {desc:'Джиновая тварь, питающаяся кристаллами.', secret:'Днём менее агрессивен.'},
-  'Кристаллический жук': {desc:'Небольшое существо, покрытое кристаллами.', secret:'Иногда можно получить кристалл двойного размера.'},
-  'Пещерный скорпион': {desc:'Ядовитый охранник подземелий.', secret:'Его яд можно использовать в алхимии.'},
-  'Чудовище': {desc:'Гигант из глубин Мисра.', secret:'Иногда роняет редкий фрагмент руны.'},
-  'Отверженный': {desc:'Потерянная душа пустыни.', secret:'Враждебен только ночью.'},
-
-  'Имперский полицейский': {desc:'Механизированный страж Алотерры.', secret:'Часто патрулирует по определённому маршруту.'},
-  'Имперский пёс': {desc:'Агрессивный биоуправляемый зверь.', secret:'Охотится небольшими стаями.'},
-  'Автономный бот': {desc:'Робот-разведчик с простыми боевыми алгоритмами.', secret:'Может реагировать на электромагнитные помехи.'},
-  'ΑΠΜ-ΤΑΡAH': {desc:'Прототип брони инспектора.', secret:'Иногда выдает большую энергию при уничтожении.'},
-  'АПМ-ХИЩНИК': {desc:'Боевой механизм охоты на крупную добычу.', secret:'Его чипы можно собирать для апгрейда.'},
-  'АПМ-ЖАЛО': {desc:'Короткий, но смертоносный дрон-глайдер.', secret:'Жало имеет шанс пробить любую броню.'},
-
-  'Убийца': {desc:'Холодный сонный ассасин Междумирья.', secret:'Говорят, он охотится за чужими снами.'},
-  'Призрачный олень': {desc:'Эфирное существо, оставляющее следы света.', secret:'Следы приводят к скрытым сундукам.'},
-  'Наблюдатель': {desc:'Создание, следящее за потоками реальности.', secret:'Его глаза могут открыть портал на 3 секунды.'},
-  'Скорпион': {desc:'Пустынный хищник из разломов.', secret:'Секрет: в логове скорпиона есть знак — попробуй передать его в чат.'},
-  'Страж': {desc:'Огромный охранник, питающийся энергией мира.', secret:'Убивая стража — шанс получить ядро междумирья.'},
-  'Хранитель': {desc:'Последний защитник древних реликвий.', secret:'Он часто охраняет скрытые комнаты.'}
-};
-
-/* =========================
-   Rendering functions
-   ========================= */
-
-const cards = document.getElementById('cards');
-const search = document.getElementById('search');
-const worldFilter = document.getElementById('worldFilter');
-const itemGrid = document.getElementById('itemGrid');
-const fanModeToggle = document.getElementById('fanModeToggle');
-const settingsPanel = document.getElementById('settingsPanel');
-const openSettings = document.getElementById('openSettings');
-
-// load fan mode from storage
-let fanMode = localStorage.getItem('fanMode') === 'true';
-fanModeToggle.checked = fanMode;
-
-// render items list
-function renderItems(){
-  itemGrid.innerHTML = '';
-  items.forEach(it=>{
-    const div = document.createElement('div');
-    div.className = 'item-card';
-    div.innerHTML = `<h3>${it}</h3>`;
-    itemGrid.appendChild(div);
-  });
-}
-renderItems();
-
-// render mobs with optional fan text
-function renderMobs(){
-  const q = search.value.trim().toLowerCase();
-  const w = worldFilter.value;
-  cards.innerHTML = '';
-
-  // ensure order: Даливарика -> Миср -> Алотерра -> Междумирье
-  const order = ['Даливарика','Миср','Алотерра','Междумирье'];
-  order.forEach(worldName => {
-    const list = enemies.filter(e => e.world === worldName);
-    list.forEach(e=>{
-      if ( (w === 'all' || e.world === w) && e.name.toLowerCase().includes(q) ){
-        const div = document.createElement('div');
-        div.className = 'card';
-        let html = `<h3>${e.order}. ${e.name}</h3><div class="world">Мир: ${e.world}</div>`;
-        html += e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('');
-        // fan mode content
-        if (fanMode && fan[e.name]) {
-          html += `<div class="fan-desc">${fan[e.name].desc}</div>`;
-          html += `<div class="fan-secret">Секрет: ${fan[e.name].secret}</div>`;
-        }
-        div.innerHTML = html;
-        cards.appendChild(div);
-      }
-    });
-  });
-}
-
-// search/filter listeners
-search.addEventListener('input', renderMobs);
-worldFilter.addEventListener('change', renderMobs);
-
-// tabs
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    // focus first control for accessibility
-    if (btn.dataset.tab === 'mobs') search.focus();
-  });
-});
-
-// settings panel toggle
-openSettings.addEventListener('click', ()=>{
-  const active = settingsPanel.classList.toggle('active');
-  settingsPanel.setAttribute('aria-hidden', active ? 'false' : 'true');
-});
-
-// fan mode toggle handler
-fanModeToggle.addEventListener('change', ()=>{
-  fanMode = !!fanModeToggle.checked;
-  localStorage.setItem('fanMode', fanMode ? 'true' : 'false');
-  renderMobs();
-});
-
-// initial render
-renderMobs();
-
-</script>
-<script>
+// ===== Вкладки =====
 document.querySelectorAll('.tab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
     btn.classList.add('active');
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
   });
 });
-</script></body>
-</html>
+
+// ===== Мобы =====
+const fanDescriptions = {
+  enabled: false
+};
+
+document.getElementById('fanMode').addEventListener('change', e=>{
+  fanDescriptions.enabled = e.target.checked;
+  renderMobs();
+  renderAchievements();
+});
+
+const enemies = [
+  // ===== Даливарика =====
+  { world: 'Даливарика', order: 1, name: 'Нежить', drops: ['Свиток «Шлем Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Сломанная кость — 10%'], fan:'Эта нежить раньше охраняла древние руины, фан-легенда.' },
+  { world: 'Даливарика', order: 2, name: 'Векс', drops: ['Свиток «Ботинки Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Фрагмент папируса — 10%'], fan:'Охотник за магическими сокровищами, фан-описание.' },
+  { world: 'Даливарика', order: 3, name: 'Поборник', drops: ['Свиток «Штаны Тёмного Рыцаря» — 6%', 'Вороной герб — 10%', 'Камушек — 10%'], fan:'Храбрый воин, фан-легенда.' },
+  { world: 'Даливарика', order: 4, name: 'Природный элементаль', drops: ['Свиток «Кираса Тёмного Рыцаря» — 6%', 'Осколок чёрного металла — 10%', 'Вороной герб — 10%', 'Сломанная кость — 10%', 'Фрагмент папируса — 10%', 'Камушек — 10%'], fan:'Сущность стихии, фан-описание.' },
+  { world: 'Даливарика', order: 5, name: 'Гримуар', drops: ['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Вороной герб — 14%','Осколок чёрного металла — 14%','Сломанная кость — 14%','Фрагмент папируса — 14%','Камушек — 14%'], fan:'Могущественный магический том, фан-легенда.' },
+  { world: 'Даливарика', order: 6, name: 'Спектральный некромант', drops: ['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного металла — 20%','Вороной герб — 20%','Сломанная кость — 20%','Фрагмент папируса — 20%','Камушек — 20%'], fan:'Темный маг, фан-описание.' },
+  // ===== Миср =====
+  { world: 'Миср', order: 1, name: 'Городской разбойник', drops: ['Свиток «Шлем Повелителя Песков» — 6%','Песчинка всевластия — 10%','Рунная плита — 10%'], fan:'Фан-описание разбойника.' },
+  { world: 'Миср', order: 2, name: 'Тоифэтун', drops: ['Свиток «Ботинки Повелителя Песков» — 6%','Сердце Джинна — 10%','Аметистовый кристалл — 10%'], fan:'Фан-легенда джинна.' },
+  { world: 'Миср', order: 3, name: 'Кристаллический жук', drops: ['Свиток «Штаны Повелителя Песков» — 6%','Песчинка всевластия — 10%','Клочок шёлка — 10%'], fan:'Жук с магическим кристаллом, фан-описание.' },
+  { world: 'Миср', order: 4, name: 'Пещерный скорпион', drops: ['Свиток «Кираса Повелителя Песков» — 6%','Сердце Джинна — 10%','Песчинка всевластия — 10%','Аметистовый кристалл — 10%','Рунная плита — 10%','Клочок шёлка — 10%'], fan:'Скорпион, фан-легенда.' },
+  { world: 'Миср', order: 5, name: 'Чудовище', drops: ['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»','Сердце Джинна — 14%','Песчинка всевластия — 14%','Аметистовый кристалл — 14%','Рунная плита — 14%','Клочок шёлка — 14%'], fan:'Чудовище фан-описание.' },
+  { world: 'Миср', order: 6, name: 'Отверженный', drops: ['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»','Сердце Джинна — 20%','Песчинка всевластия — 20%','Аметистовый кристалл — 20%','Рунная плита — 20%','Клочок шёлка — 20%'], fan:'Отверженный, фан-описание.' },
+  // ===== Алотерра =====
+  { world: 'Алотерра', order: 1, name: 'Имперский полицейский', drops: ['Свиток «Шлем Инспектора Империи» — 5%','Первичная материя — 7%','Мини-реактор — 7%'], fan:'Имперский страж, фан-описание.' },
+  { world: 'Алотерра', order: 2, name: 'Имперский пёс', drops: ['Свиток «Ботинки Инспектора Империи» — 5%','Сгусток неизвестной субстанции — 7%','Технопластина — 7%'], fan:'Имперский пёс, фан-описание.' },
+  { world: 'Алотерра', order: 3, name: 'Автономный бот', drops: ['Свиток «Штаны Инспектора Империи» — 5%','Микросхема — 7%','Мини-реактор — 7%'], fan:'Автономный бот, фан-описание.' },
+  { world: 'Алотерра', order: 4, name: 'ΑΠΜ-ΤΑΡAH', drops: ['Свиток «Кираса Инспектора Империи» — 5%','Мини-реактор — 10%','Технопластина — 10%','Микросхема — 10%','Сгусток неизвестной субстанции —
