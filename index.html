@@ -15,151 +15,30 @@
   --muted:#9fb4d8;
 }
 *{box-sizing:border-box;}
-body{
-  margin:0;
-  background:radial-gradient(circle at top,#0a1020,#05070a 60%);
-  color:var(--text);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
-  line-height:1.6;
-  font-weight:700;
-}
-header{
-  background:#05070a;
-  border-bottom:3px solid var(--border);
-  padding:20px;
-  text-align:center;
-}
-header h1{
-  font-family:'Press Start 2P',monospace;
-  color:var(--accent);
-  font-size:22px;
-  margin:0;
-}
-.subtitle{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:6px;
-  font-weight:700;
-}
-.warning{
-  color:#ff5252;
-  font-size:12px;
-  margin-top:6px;
-  font-weight:700;
-}
-.tabs{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin-top:16px;
-  flex-wrap:wrap;
-}
-.tab{
-  font-family:'Press Start 2P',monospace;
-  background:var(--card);
-  border:2px solid var(--border);
-  color:var(--text);
-  padding:10px 16px;
-  border-radius:12px;
-  cursor:pointer;
-  transition:.2s;
-  font-weight:700;
-}
-.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6);}
-.tab.active{
-  background:rgba(30,136,255,.15);
-  box-shadow:0 0 18px rgba(30,136,255,.8);
-}
-main{
-  max-width:1300px;
-  margin:0 auto;
-  padding:26px;
-}
-.controls{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  margin-bottom:26px;
-  flex-wrap:wrap;
-}
-input,select,button{
-  background:#070b14;
-  border:2px solid var(--border);
-  color:var(--text);
-  padding:10px 14px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:700;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:22px;
-}
-.card, .item-card, .prestige-card, .achievement-card{
-  background:linear-gradient(180deg,#0d162a,var(--card));
-  border:2px solid var(--border);
-  border-radius:18px;
-  padding:22px;
-  box-shadow:0 0 20px rgba(30,136,255,.15);
-  font-weight:700;
-}
-.card h3, .item-card h3, .prestige-card h3, .achievement-card h3{
-  font-family:'Press Start 2P',monospace;
-  color:var(--accent);
-  font-size:14px;
-  margin:0 0 14px 0;
-  font-weight:700;
-}
-.world{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:10px;
-  font-weight:700;
-}
-.stat{
-  font-size:14px;
-  margin-bottom:6px;
-  color:var(--text);
-  font-weight:700;
-}
-.items-grid, .achievements-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:22px;
-  margin-top:22px;
-}
-section h2{
-  font-family:'Press Start 2P',monospace;
-  color:var(--accent);
-  margin-bottom:18px;
-  font-weight:700;
-}
-footer{
-  border-top:2px solid var(--border);
-  margin-top:40px;
-  padding:20px;
-  text-align:center;
-  color:var(--muted);
-  font-weight:700;
-}
-footer a{
-  color:var(--accent);
-  text-decoration:none;
-  font-weight:700;
-}
-.tab-content{
-  display:none;
-}
-.tab-content.active{
-  display:block;
-}
-.settings{
-  margin-top:26px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
+body{margin:0; background:radial-gradient(circle at top,#0a1020,#05070a 60%); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; line-height:1.6; font-weight:700;}
+header{ background:#05070a; border-bottom:3px solid var(--border); padding:20px; text-align:center;}
+header h1{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:22px; margin:0;}
+.subtitle{color:var(--muted);font-size:13px;margin-top:6px;font-weight:700}
+.warning{color:#ff5252;font-size:12px;margin-top:6px;font-weight:700}
+.tabs{ display:flex; justify-content:center; gap:12px; margin-top:16px; flex-wrap:wrap;}
+.tab{ font-family:'Press Start 2P',monospace; background:var(--card); border:2px solid var(--border); color:var(--text); padding:10px 16px; border-radius:12px; cursor:pointer; transition:.2s; font-weight:700;}
+.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6)}
+.tab.active{ background:rgba(30,136,255,.15); box-shadow:0 0 18px rgba(30,136,255,.8);}
+main{max-width:1300px;margin:0 auto;padding:26px}
+.controls{ display:flex; gap:12px; justify-content:center; margin-bottom:26px; flex-wrap:wrap; }
+input,select{ background:#070b14; border:2px solid var(--border); color:var(--text); padding:10px 14px; border-radius:12px; font-size:14px; font-weight:700; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+.card, .item-card, .prestige-card, .achievement-card{ background:linear-gradient(180deg,#0d162a,var(--card)); border:2px solid var(--border); border-radius:18px; padding:22px; box-shadow:0 0 20px rgba(30,136,255,.15); font-weight:700; }
+.card h3, .item-card h3, .prestige-card h3, .achievement-card h3{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:14px; margin:0 0 14px 0; font-weight:700; }
+.world{color:var(--muted);font-size:13px;margin-bottom:10px;font-weight:700} 
+.stat{font-size:14px;margin-bottom:6px;color:var(--text);font-weight:700}
+.items-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:22px; margin-top:22px; }
+section h2{ font-family:'Press Start 2P',monospace; color:var(--accent); margin-bottom:18px; font-weight:700; }
+footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-align:center; color:var(--muted); font-weight:700; } 
+footer a{color:var(--accent);text-decoration:none;font-weight:700}
+.tab-content{display:none} .tab-content.active{display:block} 
+.settings-panel{background:var(--card); border:2px solid var(--border); border-radius:18px; padding:20px; margin-top:20px; display:flex; flex-direction:column; gap:12px;}
+button {cursor:pointer;}
 </style>
 </head>
 <body>
@@ -174,9 +53,7 @@ footer a{
     <button class="tab" data-tab="settings">Настройки</button>
   </nav>
 </header>
-
 <main>
-  <!-- Мобы -->
   <section id="tab-mobs" class="tab-content active">
     <div class="controls">
       <input id="search" placeholder="Поиск по имени…" />
@@ -191,7 +68,6 @@ footer a{
     <div id="cards" class="grid"></div>
   </section>
 
-  <!-- Предметы -->
   <section id="tab-items" class="tab-content">
     <h2>Предметы</h2>
     <div class="items-grid">
@@ -204,7 +80,6 @@ footer a{
     </div>
   </section>
 
-  <!-- Престиж -->
   <section id="tab-prestige" class="tab-content">
     <h2>Престиж</h2>
     <div class="prestige-card">
@@ -219,6 +94,7 @@ footer a{
         <li>Опыт: 1x → 2.9x</li>
       </ul>
       <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+
       <h3>2 уровень престижа</h3>
       <ul>
         <li>Урон: 1.15x → 1.32x</li>
@@ -230,6 +106,7 @@ footer a{
         <li>Опыт: 2.9x → 8.41x</li>
       </ul>
       <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+
       <h3>3 уровень престижа</h3>
       <ul>
         <li>Урон: 1.32x → 1.52x</li>
@@ -241,24 +118,26 @@ footer a{
         <li>Опыт: 8.41x → 24.39x</li>
       </ul>
       <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
-      <p><i>В будущем будут добавлены 4, 5 и выше.</i></p>
+      <p><i>В будущем будут добавлены 4 и 5 уровни престижа</i></p>
     </div>
   </section>
 
-  <!-- Настройки и фан-режим -->
   <section id="tab-settings" class="tab-content">
     <h2>Настройки</h2>
-    <div class="settings">
+    <div class="settings-panel">
       <label>
-        <input type="checkbox" id="fanModeToggle"> Включить фан-режим (описание и секреты)
+        <input type="checkbox" id="fanModeToggle" /> Включить фан-режим (фан описание и секреты)
       </label>
       <div>
-        <h3>Коды достижений</h3>
-        <input id="promoInput" placeholder="Введите код…">
-        <button id="promoBtn">Активировать</button>
-        <p id="codeMessage" style="color:#ff9800;font-weight:700;"></p>
+        <input type="text" id="promoInput" placeholder="Введите код..." />
+        <button id="promoBtn">Активировать код</button>
+        <div id="codeMessage" style="margin-top:5px;color:#ff5252;font-weight:700"></div>
       </div>
     </div>
+    <section id="achievements" style="margin-top:20px;">
+      <h2>Достижения (Фан-режим)</h2>
+      <div id="achievementsGrid" class="grid"></div>
+    </section>
   </section>
 </main>
 
@@ -268,41 +147,124 @@ footer a{
 </footer>
 
 <script>
-// Вкладки
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+// ===== Вкладки =====
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
   });
 });
 
-// Мобы
+// ===== Мобы =====
 const enemies = [
-  // ===== Даливарика =====
-  { world:'Даливарика', order:1, name:'Нежить', drops:['Свиток «Шлем Тёмного Рыцаря» — 6%','Вороной герб — 10%','Сломанная кость — 10%'] },
-  { world:'Даливарика', order:2, name:'Векс', drops:['Свиток «Ботинки Тёмного Рыцаря» — 6%','Осколок чёрного металла — 10%','Фрагмент папируса — 10%'] },
-  { world:'Даливарика', order:3, name:'Поборник', drops:['Свиток «Штаны Тёмного Рыцаря» — 6%','Вороной герб — 10%','Камушек — 10%'] },
-  { world:'Даливарика', order:4, name:'Природный элементаль', drops:['Свиток «Кираса Тёмного Рыцаря» — 6%','Осколок чёрного металла — 10%','Вороной герб — 10%','Сломанная кость — 10%','Фрагмент папируса — 10%','Камушек — 10%'] },
-  { world:'Даливарика', order:5, name:'Гримуар', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»'] },
-  { world:'Даливарика', order:6, name:'Спектральный некромант', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»'] },
+  { world: 'Даливарика', order: 1, name: 'Нежить', drops: ['Свиток "Шлем Тёмного Рыцаря" — 6%','Вороной герб — 10%','Сломанная кость — 10%'] },
+  { world: 'Даливарика', order: 2, name: 'Векс', drops: ['Свиток "Ботинки Тёмного Рыцаря" — 6%','Осколок чёрного металла — 10%','Фрагмент папируса — 10%'] },
+  { world: 'Даливарика', order: 3, name: 'Поборник', drops: ['Свиток "Штаны Тёмного Рыцаря" — 6%','Вороной герб — 10%','Камушек — 10%'] },
+  { world: 'Даливарика', order: 4, name: 'Природный элементаль', drops: ['Свиток "Кираса Тёмного Рыцаря" — 6%','Осколок чёрного металла — 10%','Вороной герб — 10%','Сломанная кость — 10%','Фрагмент папируса — 10%','Камушек — 10%'] },
+  { world: 'Даливарика', order: 5, name: 'Гримуар', drops: ['Шлем','Ботинки','Штаны','Кираса'] },
+  { world: 'Даливарика', order: 6, name: 'Спектральный некромант', drops: ['Шлем','Ботинки','Штаны','Кираса'] },
 
-  // ===== Миср =====
-  { world:'Миср', order:1, name:'Городской разбойник', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»'] },
-  { world:'Миср', order:2, name:'Тоифэтун', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»'] },
-  { world:'Миср', order:3, name:'Кристаллический жук', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»'] },
-  { world:'Миср', order:4, name:'Пещерный скорпион', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»'] },
-  { world:'Миср', order:5, name:'Чудовище', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»'] },
-  { world:'Миср', order:6, name:'Отверженный', drops:['Свиток «Шлем Повелителя Песков»','Свиток «Ботинки Повелителя Песков»','Свиток «Штаны Повелителя Песков»','Свиток «Кираса Повелителя Песков»'] },
+  { world: 'Миср', order: 1, name: 'Городской разбойник', drops: ['Шлем','Ботинки','Штаны','Кираса','Песчинка всевластия','Рунная плита'] },
+  { world: 'Миср', order: 2, name: 'Тоифэтун', drops: ['Шлем','Ботинки','Штаны','Кираса','Сердце Джинна','Аметистовый кристалл'] },
+  { world: 'Миср', order: 3, name: 'Кристаллический жук', drops: ['Шлем','Ботинки','Штаны','Кираса','Песчинка всевластия','Клочок шёлка'] },
+  { world: 'Миср', order: 4, name: 'Пещерный скорпион', drops: ['Шлем','Ботинки','Штаны','Кираса','Сердце Джинна','Песчинка всевластия','Аметистовый кристалл','Рунная плита','Клочок шёлка'] },
+  { world: 'Миср', order: 5, name: 'Чудовище', drops: ['Шлем','Ботинки','Штаны','Кираса','Сердце Джинна','Песчинка всевластия','Аметистовый кристалл','Рунная плита','Клочок шёлка'] },
+  { world: 'Миср', order: 6, name: 'Отверженный', drops: ['Шлем','Ботинки','Штаны','Кираса','Сердце Джинна','Песчинка всевластия','Аметистовый кристалл','Рунная плита','Клочок шёлка'] },
 
-  // ===== Алотерра =====
-  { world:'Алотерра', order:1, name:'Имперский полицейский', drops:['Свиток «Шлем Инспектора Империи»','Первичная материя','Мини-реактор'] },
-  { world:'Алотерра', order:2, name:'Имперский пёс', drops:['Свиток «Ботинки Инспектора Империи»','Сгусток неизвестной субстанции','Технопластина'] },
-  { world:'Алотерра', order:3, name:'Автономный бот', drops:['Свиток «Штаны Инспектора Империи»','Микросхема','Мини-реактор'] },
-  { world:'Алотерра', order:4, name:'ΑΠΜ-ΤΑΡAH', drops:['Свиток «Кираса Инспектора Империи»','Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная материя'] },
-  { world:'Алотерра', order:5, name:'АПМ-Хищник', drops:['Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная материя'] },
-  { world:'Алотерра', order:6, name:'АПМ-Жало', drops:['Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная материя'] },
+  { world: 'Алотерра', order: 1, name: 'Имперский полицейский', drops: ['Шлем Инспектора империи','Первичная материя','Мини-реактор'] },
+  { world: 'Алотерра', order: 2, name: 'Имперский пёс', drops: ['Ботинки Инспектора Империи','Сгусток неизвестной субстанции','Технопластина'] },
+  { world: 'Алотерра', order: 3, name: 'Автономный бот', drops: ['Штаны Инспектора Империи','Микросхема','Мини-реактор'] },
+  { world: 'Алотерра', order: 4, name: 'АПМ-ΤΑΡAH', drops: ['Кираса Инспектора Империи','Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная Материя'] },
+  { world: 'Алотерра', order: 5, name: 'АПМ-Хищник', drops: ['Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная Материя'] },
+  { world: 'Алотерра', order: 6, name: 'АПМ-Жало', drops: ['Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная Материя'] },
 
-  // ===== Междумирье =====
-  { world:'Междумирье', order:1, name:'Убийца', drops:['Свиток «Шлем Странника Пустоты»','К
+  { world: 'Междумирье', order: 1, name: 'Убийца', drops: ['Шлем Странника Пустоты','Кристалл скинта','Лоскут бездны'] },
+  { world: 'Междумирье', order: 2, name: 'Призрачный олень', drops: ['Ботинки Странника Пустоты','Ядро междумирья','Сингулярная жемчужина'] },
+  { world: 'Междумирье', order: 3, name: 'Наблюдатель', drops: ['Штаны Странника Пустоты','Лоскут бездны','Осколок бездны'] },
+  { world: 'Междумирье', order: 5, name: 'Скорпион', drops: ['Лоскут бездны','Сингулярная жемчужина','Ядро междумирья','Кристалл скинта'] },
+  { world: 'Междумирье', order: 6, name: 'Страж', drops: ['Лоскут бездны','Осколок бездны','Сингулярная жемчужина','Ядро междумирья','Кристалл скинта'] },
+  { world: 'Междумирье', order: 7, name: 'Хранитель', drops: ['Лоскут бездны','Осколок бездны','Сингулярная жемчужина','Ядро междумирья','Кристалл скинта'] }
+];
+
+const cards = document.getElementById('cards');
+const search = document.getElementById('search');
+const worldFilter = document.getElementById('worldFilter');
+
+function renderMobs() {
+  const q = search.value.toLowerCase();
+  const w = worldFilter.value;
+  cards.innerHTML = '';
+  enemies.filter(e => (w === 'all' || e.world === w))
+         .filter(e => e.name.toLowerCase().includes(q))
+         .forEach(e => {
+           const div = document.createElement('div');
+           div.className = 'card';
+           div.innerHTML = `<h3>${e.order}. ${e.name}</h3>
+                            <div class="world">Мир: ${e.world}</div>
+                            ${e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('')}`;
+           cards.appendChild(div);
+         });
+}
+search.addEventListener('input', renderMobs);
+worldFilter.addEventListener('change', renderMobs);
+renderMobs();
+
+// ===== Достижения и фан режим =====
+const fanModeToggle = document.getElementById('fanModeToggle');
+const achievementsGrid = document.getElementById('achievementsGrid');
+const promoInput = document.getElementById('promoInput');
+const promoBtn = document.getElementById('promoBtn');
+const codeMessage = document.getElementById('codeMessage');
+
+let achievements = [];
+for(let i=1;i<=50;i++){
+  achievements.push({id:i,name:`Достижение ${i}`,obtained:false,desc:i>40?'Секретное':''});
+}
+
+// Сохраняем в localStorage
+if(!localStorage.getItem('achievements')){
+  localStorage.setItem('achievements',JSON.stringify(achievements));
+}else{
+  achievements = JSON.parse(localStorage.getItem('achievements'));
+}
+
+function renderAchievements(){
+  achievementsGrid.innerHTML = '';
+  if(!fanModeToggle.checked) return;
+  achievements.forEach(a=>{
+    const div = document.createElement('div');
+    div.className='achievement-card';
+    div.innerHTML=`<h3>${a.name}${a.obtained?' ✅':''}</h3>
+                   <p>${a.obtained?'Получено':'Для получения достижения введи код.'}</p>`;
+    achievementsGrid.appendChild(div);
+  });
+}
+fanModeToggle.addEventListener('change',renderAchievements);
+renderAchievements();
+
+// ===== Коды =====
+const codes = {1:1,2:2,3:3,4:4,'wlnzlileg':5};
+promoBtn.addEventListener('click',()=>{
+  const code = promoInput.value.trim();
+  if(code==='code hop'){
+    // даём сразу все достижения
+    achievements.forEach(a=>a.obtained=true);
+    localStorage.setItem('achievements',JSON.stringify(achievements));
+    renderAchievements();
+    codeMessage.textContent='Все достижения получены!';
+    return;
+  }
+  if(codes[code]){
+    const id = codes[code]-1;
+    achievements[id].obtained=true;
+    localStorage.setItem('achievements',JSON.stringify(achievements));
+    renderAchievements();
+    codeMessage.textContent='Достижение получено!';
+  }else{
+    codeMessage.textContent='Неверный код.';
+  }
+  promoInput.value='';
+});
+</script>
