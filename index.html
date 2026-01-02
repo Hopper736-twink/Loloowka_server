@@ -3,149 +3,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Путь героя — фан-справочник</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b0f0c;
-      --card: #1c2a1f;
-      --accent: #ffd700;
-      --text: #e6f2ea;
-      --muted: #8fa99a;
-      --danger: #e74c3c;
-      --hover: #2ecc71;
-    }* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: 'Press Start 2P', monospace;
-  background: linear-gradient(120deg, #102218, #0d1b14);
-  color: var(--text);
+/* вкладки */
+.tabs { display:flex; gap:10px; justify-content:center; margin-top:14px; flex-wrap:wrap; }
+.tab {
+  font-family:'Press Start 2P', monospace;
+  background:#0f1a2e;
+  border:2px solid var(--accent);
+  color:var(--text);
+  padding:8px 14px;
+  border-radius:10px;
+  cursor:pointer;
 }
+.tab.active { background:var(--accent); color:#000; }.tab-content { display:none; } .tab-content.active { display:block; } </style>
 
-header {
-  padding: 20px;
-  text-align: center;
-  background: #07110b;
-  border-bottom: 3px solid var(--accent);
-}
-
-header h1 { font-size: 24px; color: var(--accent); margin: 0; }
-header .subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
-.warning { color: var(--danger); font-weight: 700; margin-top: 6px; font-size: 12px; }
-
-main { max-width: 1200px; margin: 0 auto; padding: 16px; }
-
-.controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; justify-content: center; }
-input, select {
-  background: #0f1f12;
-  border: 2px solid var(--accent);
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  transition: 0.2s;
-}
-input:focus, select:focus { border-color: var(--hover); outline: none; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 18px;
-}
-
-.card {
-  background: linear-gradient(180deg, #12261b, var(--card));
-  border: 2px solid var(--accent);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
-
-.card h3 { margin: 0 0 8px 0; color: var(--accent); font-size: 14px; }
-.world { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
-.stat { font-size: 11px; margin-bottom: 3px; }
-.stat span { color: var(--muted); }
-
-footer { margin-top: 30px; padding: 16px; border-top: 2px solid var(--accent); font-size: 12px; color: var(--muted); text-align: center; }
-footer a { color: var(--accent); text-decoration: none; }
-
-  </style>
 </head>
 <body><header>
   <h1>Путь героя — фан-справочник</h1>
-  <div class="subtitle">Сервер Лололошки • Характеристики мобов</div>
-  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>
+  <div class="subtitle">Сервер Лололошки • Характеристики и механики</div>
+  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>  <nav class="tabs">
+    <button class="tab active" data-tab="mobs">Мобы</button>
+    <button class="tab" data-tab="items">Предметы</button>
+    <button class="tab" data-tab="prestige">Престиж</button>
+  </nav>
 </header><main>
-  <div class="controls">
-    <input id="search" placeholder="Поиск по имени…" />
-    <select id="worldFilter">
-      <option value="all">Все миры</option>
-      <option value="Даливарика">Даливарика</option>
-      <option value="Миср">Миср</option>
-    </select>
-  </div>
-  <div id="cards" class="grid"></div>
-<section id="items">
-  <h2>Предметы</h2>
-  <p class="note">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ. Информация собирается игроками.</p>  <div class="items-grid">
-    <div class="item-card">
-      <h3>Свитки брони</h3>
-      <p>Используются для получения частей брони соответствующего сета.</p>
+  <!-- Мобы -->
+  <section id="tab-mobs" class="tab-content active">
+    <div class="controls">
+      <input id="search" placeholder="Поиск по имени…" />
+      <select id="worldFilter">
+        <option value="all">Все миры</option>
+        <option value="Даливарика">Даливарика</option>
+        <option value="Миср">Миср</option>
+      </select>
+    </div>
+    <div id="cards" class="grid"></div>
+  </section>  <!-- Предметы -->  <section id="tab-items" class="tab-content">
+    <h2>Предметы</h2>
+    <div class="items-grid">
+      <div class="item-card"><h3>Свитки брони</h3><p>Используются для получения частей брони соответствующего сета.</p></div>
+      <div class="item-card"><h3>Песчинка всевластия</h3><p>Ресурс мира Миср.</p></div>
+      <div class="item-card"><h3>Сердце Джинна</h3><p>Магический предмет пустыни.</p></div>
+      <div class="item-card"><h3>Аметистовый кристалл</h3><p>Кристалл магической энергии.</p></div>
+      <div class="item-card"><h3>Рунная плита</h3><p>Древний артефакт.</p></div>
+      <div class="item-card"><h3>Клочок шёлка</h3><p>Обычный материал.</p></div>
+    </div>
+  </section>  <!-- Престиж -->  <section id="tab-prestige" class="tab-content">
+    <h2>Престиж</h2>
+    <div class="prestige-card">
+      <h3>1 уровень престижа</h3>
       <ul>
-        <li>Шлем</li>
-        <li>Ботинки</li>
-        <li>Штаны</li>
-        <li>Кираса</li>
+        <li>Урон: 1x → 1.15x</li>
+        <li>Защита: 1x → 1.15x</li>
+        <li>Здоровье: 1x → 1.15x</li>
+        <li>Регенерация: 1x → 1.16x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 1x → 2.9x</li>
+        <li>Опыт: 1x → 2.9x</li>
       </ul>
-    </div><div class="item-card">
-  <h3>Песчинка всевластия</h3>
-  <p>Редкий ресурс мира Миср. Применяется в улучшениях.</p>
-</div>
-
-<div class="item-card">
-  <h3>Сердце Джинна</h3>
-  <p>Магический предмет, связанный с пустынными существами.</p>
-</div>
-
-<div class="item-card">
-  <h3>Аметистовый кристалл</h3>
-  <p>Кристалл с высокой концентрацией магии.</p>
-</div>
-
-<div class="item-card">
-  <h3>Рунная плита</h3>
-  <p>Древняя плита с выгравированными рунами.</p>
-</div>
-
-<div class="item-card">
-  <h3>Клочок шёлка</h3>
-  <p>Материал, часто выпадает с существ Мисра.</p>
-</div>
-
-  </div>  <p class="tg">Есть доп. информация или ошибки — писать в бота <b>@YoutubeHopper_bot</b></p>
-</section><section id="prestige">
-  <h2>Престиж</h2>
-  <p class="note">Престиж — это перерождение, доступное после достижения <b>100 уровня</b>.</p>  <div class="prestige-card">
-    <h3>1 уровень престижа</h3><h4>Бонусы следующего уровня престижа:</h4>
-<ul>
-  <li>Урон: 1x → <b>1.15x</b></li>
-  <li>Защита: 1x → <b>1.15x</b></li>
-  <li>Здоровье: 1x → <b>1.15x</b></li>
-  <li>Регенерация: 1x → <b>1.16x</b></li>
-  <li>Скорость: 1x → <b>1x</b></li>
-  <li>Золото: 1x → <b>2.9x</b></li>
-  <li>Опыт: 1x → <b>2.9x</b></li>
-</ul>
-
-<h4>Для повышения необходимо:</h4>
-<ul>
-  <li>Достигнуть 100 уровня игрока</li>
-  <li>Выполнить квесты на локации <b>Междумирье</b></li>
-</ul>
-
-  </div>  <p class="tg">Информация уточняется. Писать: <b>@YoutubeHopper_bot</b></p>
-</section>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+    </div>
+  </section>
 </main><footer>
   <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
   <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
@@ -194,5 +113,15 @@ function render() {
 search.addEventListener('input', render);
 worldFilter.addEventListener('change', render);
 render();
+</script><script>
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
 </script></body>
 </html>
