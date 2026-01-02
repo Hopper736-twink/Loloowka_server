@@ -93,6 +93,10 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
 .code-input{ display:flex; gap:8px; margin-top:8px; align-items:center; }
 .code-input input{ flex:1; }
 .btn{ background:var(--card); border:2px solid var(--border); color:var(--text); padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:700; }
+
+/* tab content visibility */
+.tab-content{ display:none; }
+.tab-content.active{ display:block; }
 </style>
 </head>
 <body>
@@ -104,7 +108,7 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
 
   <div class="header-row">
     <nav class="tabs" role="navigation" aria-label="Вкладки">
-      <button class="tab active" data-tab="mobs">Мобы</button>
+      <button class="tab" data-tab="mobs">Мобы</button>
       <button class="tab" data-tab="items">Предметы</button>
       <button class="tab" data-tab="prestige">Престиж</button>
       <button class="tab" data-tab="achievements">Достижения</button>
@@ -125,9 +129,9 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
     </label>
 
     <div style="margin-top:12px">
-      <div style="font-weight:700;margin-bottom:6px">Ввести код (каждый код даёт достижение)</div>
+      <div style="font-weight:700;margin-bottom:6px">Ввести код (1..5)</div>
       <div class="code-input">
-        <input id="promoCodeInput" type="text" placeholder="Введите код..." aria-label="Код достижения" />
+        <input id="promoCodeInput" type="text" placeholder="Введите код (например 1)" aria-label="Код достижения" />
         <button id="promoApplyBtn" class="btn">Активировать</button>
       </div>
       <div id="codeMessage" class="small" style="margin-top:8px;color:var(--muted)"></div>
@@ -148,7 +152,7 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
 
 <main>
   <!-- MOBS TAB -->
-  <section id="tab-mobs" class="tab-content active">
+  <section id="tab-mobs" class="tab-content">
     <div class="controls">
       <input id="search" type="search" placeholder="Поиск по имени…" aria-label="Поиск мобов"/>
       <select id="worldFilter" aria-label="Выбор мира">
@@ -224,18 +228,16 @@ footer{ margin-top:26px; padding:12px; border-top:2px solid var(--border); text-
 </footer>
 
 <script>
-/* ---------------------------
-   Данные и состояние
-   --------------------------- */
-/* (вставлены только необходимые блоки — все мобы, предметы и достижения сохранены) */
+/* ========== Данные (мобы, предметы, достижения) ========== */
+/* (сокращённо — все элементы присутствуют; для простоты тут полный набор) */
 
 const enemies = [
   { world:'Даливарика', order:1, name:'Нежить', drops:['Свиток «Шлем Тёмного Рыцаря» — 6%','Вороной герб — 10%','Сломанная кость — 10%'], fan:'Древняя нежить, фан-легенда.' },
-  { world:'Даливарика', order:2, name:'Векс', drops:['Свиток «Ботинки Тёмного Рыцаря» — 6%','Осколок чёрного металла — 10%','Фрагмент папируса — 10%'], fan:'Сумрачный охотник, фан-описание.' },
+  { world:'Даливарика', order:2, name:'Векс', drops:['Свиток «Ботинки Тёмного Рыцаря» — 6%','Осколок чёрного метала — 10%','Фрагмент папируса — 10%'], fan:'Сумрачный охотник, фан-описание.' },
   { world:'Даливарика', order:3, name:'Поборник', drops:['Свиток «Штаны Тёмного Рыцаря» — 6%','Вороной герб — 10%','Камушек — 10%'], fan:'Воин старых времён, фан-история.' },
-  { world:'Даливарика', order:4, name:'Природный элементаль', drops:['Свиток «Кираса Тёмного Рыцаря» — 6%','Осколок чёрного металла — 10%','Вороной герб — 10%','Сломанная кость — 10%','Фрагмент папируса — 10%','Камушек — 10%'], fan:'Дух земли, фан-описание.' },
-  { world:'Даливарика', order:5, name:'Гримуар', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного металла — 14%','Вороной герб — 14%','Сломанная кость — 14%','Фрагмент папируса — 14%','Камушек — 14%'], fan:'Магический том, фан-легенда.' },
-  { world:'Даливарика', order:6, name:'Спектральный некромант', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного металла — 20%','Вороной герб — 20%','Сломанная кость — 20%','Фрагмент папируса — 20%','Камушек — 20%'], fan:'Повелитель теней, фан-миф.' },
+  { world:'Даливарика', order:4, name:'Природный элементаль', drops:['Свиток «Кираса Тёмного Рыцаря» — 6%','Осколок чёрного метала — 10%','Вороной герб — 10%','Сломанная кость — 10%','Фрагмент папируса — 10%','Камушек — 10%'], fan:'Дух земли, фан-описание.' },
+  { world:'Даливарика', order:5, name:'Гримуар', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного метала — 14%','Вороной герб — 14%','Сломанная кость — 14%','Фрагмент папируса — 14%','Камушек — 14%'], fan:'Магический том, фан-легенда.' },
+  { world:'Даливарика', order:6, name:'Спектральный некромант', drops:['Свиток «Шлем Тёмного Рыцаря»','Свиток «Ботинки Тёмного Рыцаря»','Свиток «Штаны Тёмного Рыцаря»','Свиток «Кираса Тёмного Рыцаря»','Осколок чёрного метала — 20%','Вороной герб — 20%','Сломанная кость — 20%','Фрагмент папируса — 20%','Камушек — 20%'], fan:'Повелитель теней, фан-миф.' },
 
   { world:'Миср', order:1, name:'Городской разбойник', drops:['Свиток «Шлем Повелителя Песков» — 6%','Песчинка всевластия — 10%','Рунная плита — 10%'], fan:'Житель рыночных улиц, фан-история.' },
   { world:'Миср', order:2, name:'Тоифэтун', drops:['Свиток «Ботинки Повелителя Песков» — 6%','Сердце Джинна — 10%','Аметистовый кристалл — 10%'], fan:'Джиновая тварь, фан-легенда.' },
@@ -280,7 +282,6 @@ const items = [
   { id:'silk', name:'Клочок шёлка', desc:'Материал для одежды.' }
 ];
 
-/* achievements: сокращённо — кодовые достижения теперь в описании: "Для получения достижения введи код." */
 const achievements = [
   { id:'a1', name:'Первый взгляд', req:'Просмотреть любую карточку моба' },
   { id:'a2', name:'Первые предметы', req:'Открыть карточку любого предмета' },
@@ -326,12 +327,11 @@ const achievements = [
   { id:'a39', name:'Аналитик', req:'Выполнить 20 поисков' },
   { id:'a40', name:'Прочти всё', req:'Прочитать все описания предметов' },
 
-  // code achievements: описание теперь нейтральное
-  { id:'a41', name:'Код: support', req:'Для получения достижения введи код.' },
-  { id:'a42', name:'Код: loofan', req:'Для получения достижения введи код.' },
-  { id:'a43', name:'Код: achievements', req:'Для получения достижения введи код.' },
-  { id:'a44', name:'Код: Hopper736', req:'Для получения достижения введи код.' },
-  { id:'a45', name:'Код: (пятый)', req:'Для получения достижения введи код.' },
+  { id:'a41', name:'Код: 1', req:'Для получения достижения введи код.' },
+  { id:'a42', name:'Код: 2', req:'Для получения достижения введи код.' },
+  { id:'a43', name:'Код: 3', req:'Для получения достижения введи код.' },
+  { id:'a44', name:'Код: 4', req:'Для получения достижения введи код.' },
+  { id:'a45', name:'Код: 5', req:'Для получения достижения введи код.' },
 
   { id:'a46', name:'Админ', req:'Для получения достижения введи специальный код.' },
   { id:'a47', name:'Помощник', req:'Подтвердите, что написали в бота' },
@@ -348,17 +348,15 @@ const achievements = [
   { id:'s10', name:'Секрет 10', secret:true }
 ];
 
-/* =========================
-   Состояние (localStorage)
-   ========================= */
+/* ========== State & storage ========== */
 const STORAGE = {
-  FAN:'hero_fan_v1',
-  SHOW_ACH:'hero_show_ach_v1',
-  UNLOCK:'hero_unlocked_v1',
-  USED_CODES:'hero_used_codes_v1',
-  VIEWED_MOBS:'hero_viewed_mobs_v1',
-  VIEWED_ITEMS:'hero_viewed_items_v1',
-  CLICK_COUNT:'hero_clicks_v1'
+  FAN:'hero_fan_v2',
+  SHOW_ACH:'hero_show_ach_v2',
+  UNLOCK:'hero_unlocked_v2',
+  USED_CODES:'hero_used_codes_v2',
+  VIEWED_MOBS:'hero_viewed_mobs_v2',
+  VIEWED_ITEMS:'hero_viewed_items_v2',
+  CLICK_COUNT:'hero_clicks_v2'
 };
 
 let fanMode = localStorage.getItem(STORAGE.FAN) === 'true';
@@ -371,21 +369,18 @@ let clickCount = Number(localStorage.getItem(STORAGE.CLICK_COUNT) || 0);
 let tabSwitchCount = Number(localStorage.getItem('hero_tab_switch_count') || 0);
 let settingsOpenCount = Number(localStorage.getItem('hero_settings_open_count') || 0);
 
-/* =========================
-   Коды (в JS, не в UI)
-   ========================= */
+/* ========== Codes mapping (в JS only) ========== */
 const codeMap = {
-  'support': 'a41',
-  'loofan': 'a42',
-  'achievements': 'a43',
-  'Hopper736': 'a44',
-  'wlnzlileg': 'a45' // <- пятый код, как ты просил
+  '1': 'a41',
+  '2': 'a42',
+  '3': 'a43',
+  '4': 'a44',
+  '5': 'a45'
 };
-const adminCode = 'code hop'; // выдаёт a46 (Админ)
+const adminCode = 'code hop'; // -> a46
 
-/* =========================
-   DOM refs
-   ========================= */
+/* ========== DOM refs ========== */
+const tabs = document.querySelectorAll('.tab');
 const openSettingsBtn = document.getElementById('openSettings');
 const settingsPanel = document.getElementById('settingsPanel');
 const fanModeToggle = document.getElementById('fanModeToggle');
@@ -401,16 +396,11 @@ const promoBtn = document.getElementById('promoApplyBtn');
 const codeMessage = document.getElementById('codeMessage');
 const confirmMessagedBot = document.getElementById('confirmMessagedBot');
 
-/* =========================
-   Инициализация UI
-   ========================= */
+/* ========== Init UI values ========== */
 fanModeToggle.checked = fanMode;
 showAchievementsToggle.checked = showAchievements;
-updateAchievementsTabVisibility();
 
-/* =========================
-   Сохранение состояния
-   ========================= */
+/* ========== Helpers ========== */
 function saveState(){
   localStorage.setItem(STORAGE.FAN, fanMode ? 'true' : 'false');
   localStorage.setItem(STORAGE.SHOW_ACH, showAchievements ? 'true' : 'false');
@@ -422,24 +412,10 @@ function saveState(){
   localStorage.setItem('hero_tab_switch_count', String(tabSwitchCount));
   localStorage.setItem('hero_settings_open_count', String(settingsOpenCount));
 }
-
-/* =========================
-   Achievements helpers
-   ========================= */
 function isUnlocked(id){ return unlocked.includes(id); }
-function unlock(id){
-  if(!isUnlocked(id)){
-    unlocked.push(id);
-    saveState();
-    renderAchievements();
-    const el = document.querySelector(`.achievement-card[data-id="${id}"]`);
-    if(el){ el.classList.add('achievement-unlocked'); setTimeout(()=>el.classList.remove('achievement-unlocked'),1400); }
-  }
-}
+function unlock(id){ if(!isUnlocked(id)){ unlocked.push(id); saveState(); renderAchievements(); const el=document.querySelector(`.achievement-card[data-id="${id}"]`); if(el){ el.classList.add('achievement-unlocked'); setTimeout(()=>el.classList.remove('achievement-unlocked'),1400); } } }
 
-/* =========================
-   Renderers
-   ========================= */
+/* ========== Rendering ========== */
 function renderMobs(){
   const q = searchEl.value.trim().toLowerCase();
   const w = worldFilterEl.value;
@@ -448,81 +424,36 @@ function renderMobs(){
   order.forEach(worldName=>{
     const list = enemies.filter(e=>e.world===worldName);
     list.forEach(e=>{
-      if((w==='all'||e.world===w) && e.name.toLowerCase().includes(q)){
-        const div = document.createElement('div');
-        div.className='card'; div.tabIndex=0;
+      if((w==='all' || e.world===w) && e.name.toLowerCase().includes(q)){
+        const div = document.createElement('div'); div.className='card'; div.tabIndex=0;
         let html = `<h3>${e.order}. ${e.name}</h3><div class="world">Мир: ${e.world}</div>`;
         html += e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('');
         if(fanMode && e.fan) html += `<div class="fan-desc">${e.fan}</div>`;
         div.innerHTML = html;
-        div.addEventListener('click', ()=>{
-          viewedMobs.add(e.name); clickCount++; saveState(); checkAchievements();
-        });
+        div.addEventListener('click', ()=>{ viewedMobs.add(e.name); clickCount++; saveState(); checkAchievements(); });
         div.addEventListener('keydown',(ev)=>{ if(ev.key==='Enter'||ev.key===' '){ div.click(); ev.preventDefault(); }});
         cardsEl.appendChild(div);
       }
     });
   });
 }
+function renderItems(){ itemsGridEl.innerHTML=''; items.forEach(it=>{ const div=document.createElement('div'); div.className='item-card'; div.tabIndex=0; div.innerHTML=`<h3>${it.name}</h3><div class="small">${it.desc}</div>`; div.addEventListener('click', ()=>{ viewedItems.add(it.id); clickCount++; saveState(); checkAchievements(); }); div.addEventListener('keydown',(ev)=>{ if(ev.key==='Enter'||ev.key===' '){ div.click(); ev.preventDefault(); }}); itemsGridEl.appendChild(div); }); }
+function renderAchievements(){ achievementsGridEl.innerHTML=''; if(!showAchievements){ achievementsGridEl.innerHTML=`<div class="small">Вкладка достижений скрыта (Настройки → Показывать вкладку «Достижения»).</div>`; achievementsInfoEl.textContent = `Открыто ${unlocked.length} из ${achievements.length} достижений.`; return; } achievements.forEach(a=>{ const div=document.createElement('div'); div.className='achievement-card '+(isUnlocked(a.id)?'achievement-unlocked':'achievement-locked'); div.dataset.id=a.id; let inner=`<h3>${a.name}</h3>`; if(!a.secret && a.req) inner+=`<div class="small">${a.req}</div>`; else inner+=`<div class="small">Секретное достижение — условие не отображается</div>`; inner+=`<div class="small">Статус: ${isUnlocked(a.id)?'Открыто':'Закрыто'}</div>`; div.innerHTML=inner; achievementsGridEl.appendChild(div); }); achievementsInfoEl.textContent = `Открыто ${unlocked.length} из ${achievements.length} достижений.`; }
 
-function renderItems(){
-  itemsGridEl.innerHTML='';
-  items.forEach(it=>{
-    const div=document.createElement('div'); div.className='item-card'; div.tabIndex=0;
-    div.innerHTML=`<h3>${it.name}</h3><div class="small">${it.desc}</div>`;
-    div.addEventListener('click', ()=>{ viewedItems.add(it.id); clickCount++; saveState(); checkAchievements(); });
-    div.addEventListener('keydown',(ev)=>{ if(ev.key==='Enter'||ev.key===' '){ div.click(); ev.preventDefault(); }});
-    itemsGridEl.appendChild(div);
-  });
-}
-
-function renderAchievements(){
-  achievementsGridEl.innerHTML='';
-  if(!showAchievements){
-    achievementsGridEl.innerHTML=`<div class="small">Вкладка достижений скрыта (Настройки → Показывать вкладку «Достижения»).</div>`;
-    achievementsInfoEl.textContent = `Открыто ${unlocked.length} из ${achievements.length} достижений.`;
-    return;
-  }
-  achievements.forEach(a=>{
-    const div = document.createElement('div');
-    div.className = 'achievement-card ' + (isUnlocked(a.id) ? 'achievement-unlocked' : 'achievement-locked');
-    div.dataset.id = a.id;
-    let inner = `<h3>${a.name}</h3>`;
-    if(!a.secret && a.req) inner += `<div class="small">${a.req}</div>`;
-    else inner += `<div class="small">Секретное достижение — условие не отображается</div>`;
-    inner += `<div class="small">Статус: ${isUnlocked(a.id) ? 'Открыто' : 'Закрыто'}</div>`;
-    div.innerHTML = inner;
-    achievementsGridEl.appendChild(div);
-  });
-  achievementsInfoEl.textContent = `Открыто ${unlocked.length} из ${achievements.length} достижений.`;
-}
-
-/* =========================
-   Achievement checks
-   ========================= */
+/* ========== Achievement checks ========== */
 function checkAchievements(){
   const vm = viewedMobs.size, vi = viewedItems.size;
   if(vm>=1) unlock('a1'); if(vi>=1) unlock('a2');
   if(document.querySelector('.tab[data-tab="prestige"]').classList.contains('active')) unlock('a3');
   if(vm>=6) unlock('a4'); if(vi>=5) unlock('a5'); if(vi>=items.length) unlock('a6');
-  if(fanMode) unlock('a7');
-  if(settingsPanel.classList.contains('active')) unlock('a8');
-  if(searchEl.value.trim().length>0) unlock('a9');
-  if(worldFilterEl.value!=='all') unlock('a10');
-  if(vm>=10) unlock('a11');
-  if(tabSwitchCount>=10) unlock('a12');
-  if(worldFilterEl.value!=='all'){
-    const totalInWorld = enemies.filter(e=>e.world===worldFilterEl.value).length;
-    const viewedInWorld = enemies.filter(e=>e.world===worldFilterEl.value && viewedMobs.has(e.name)).length;
-    if(viewedInWorld===totalInWorld) unlock('a13');
-  }
-  if(vm>=12) unlock('a14'); if(vm>=18) unlock('a15');
-  if(window._prestigeVisitCount>=5) unlock('a16');
-  if(vm>=20) unlock('a17'); if(vi>=10) unlock('a19');
-  if(vm>=enemies.length) unlock('a21'); if(vi>=items.length) unlock('a22');
-  if(fanMode && vm>=10) unlock('a23');
-  if(clickCount>=50) unlock('a26'); if(tabSwitchCount>=20) unlock('a33');
-  if(clickCount>=100) unlock('a37'); if(settingsOpenCount>=10) unlock('a38');
+  if(fanMode) unlock('a7'); if(settingsPanel.classList.contains('active')) unlock('a8');
+  if(searchEl.value.trim().length>0) unlock('a9'); if(worldFilterEl.value!=='all') unlock('a10');
+  if(vm>=10) unlock('a11'); if(tabSwitchCount>=10) unlock('a12');
+  if(worldFilterEl.value!=='all'){ const totalInWorld = enemies.filter(e=>e.world===worldFilterEl.value).length; const viewedInWorld = enemies.filter(e=>e.world===worldFilterEl.value && viewedMobs.has(e.name)).length; if(viewedInWorld===totalInWorld) unlock('a13'); }
+  if(vm>=12) unlock('a14'); if(vm>=18) unlock('a15'); if(window._prestigeVisitCount>=5) unlock('a16');
+  if(vm>=20) unlock('a17'); if(vi>=10) unlock('a19'); if(vm>=enemies.length) unlock('a21');
+  if(vi>=items.length) unlock('a22'); if(fanMode && vm>=10) unlock('a23'); if(clickCount>=50) unlock('a26');
+  if(tabSwitchCount>=20) unlock('a33'); if(clickCount>=100) unlock('a37'); if(settingsOpenCount>=10) unlock('a38');
   if((vm+vi)>=30) unlock('a34'); if(vi>=18) unlock('a40');
 
   // secrets demo
@@ -534,28 +465,28 @@ function checkAchievements(){
   saveState();
 }
 
-/* =========================
-   Tabs logic
-   ========================= */
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    if(btn.classList.contains('hidden')) return;
-    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-    btn.classList.add('active');
-    const content = document.getElementById('tab-' + btn.dataset.tab);
-    if(content) content.classList.add('active');
-    tabSwitchCount++; localStorage.setItem('hero_tab_switch_count', String(tabSwitchCount));
-    if(btn.dataset.tab==='items') renderItems();
-    if(btn.dataset.tab==='achievements') renderAchievements();
-    if(btn.dataset.tab==='prestige'){ window._prestigeVisitCount = (window._prestigeVisitCount||0)+1; }
-    checkAchievements();
-  });
-});
+/* ========== Tabs logic (robust) ========== */
+function activateTab(name){
+  tabs.forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active', c.id==='tab-'+name));
+  tabSwitchCount++; localStorage.setItem('hero_tab_switch_count', String(tabSwitchCount));
+  // special renders
+  if(name==='items') renderItems();
+  if(name==='achievements') renderAchievements();
+  if(name==='prestige'){ window._prestigeVisitCount = (window._prestigeVisitCount||0) + 1; }
+  checkAchievements();
+}
+// attach listeners
+tabs.forEach(t=> t.addEventListener('click', ()=> activateTab(t.dataset.tab)));
 
-/* =========================
-   Settings panel
-   ========================= */
+// set default active tab on load
+if(!document.querySelector('.tab.active')) activateTab('mobs'); else {
+  // ensure content matches active tab
+  const active = document.querySelector('.tab.active').dataset.tab || 'mobs';
+  activateTab(active);
+}
+
+/* ========== Settings panel ========== */
 openSettingsBtn.addEventListener('click', ()=>{
   const active = settingsPanel.classList.toggle('active');
   settingsPanel.setAttribute('aria-hidden', active ? 'false' : 'true');
@@ -563,52 +494,40 @@ openSettingsBtn.addEventListener('click', ()=>{
   checkAchievements();
 });
 
-fanModeToggle.addEventListener('change', e=>{
-  fanMode = !!e.target.checked; saveState(); renderMobs(); checkAchievements(); renderAchievements();
-});
-
-showAchievementsToggle.addEventListener('change', e=>{
-  showAchievements = !!e.target.checked; saveState(); updateAchievementsTabVisibility(); renderAchievements();
-});
+fanModeToggle.addEventListener('change', (e)=>{ fanMode = !!e.target.checked; saveState(); renderMobs(); checkAchievements(); renderAchievements(); });
+showAchievementsToggle.addEventListener('change', (e)=>{ showAchievements = !!e.target.checked; saveState(); updateAchievementsTabVisibility(); renderAchievements(); });
 
 function updateAchievementsTabVisibility(){
   const tabBtn = document.querySelector('.tab[data-tab="achievements"]');
-  if(!showAchievements){ tabBtn.classList.add('hidden'); if(tabBtn.classList.contains('active')) document.querySelector('.tab[data-tab="mobs"]').click(); }
+  if(!showAchievements){ tabBtn.classList.add('hidden'); if(tabBtn.classList.contains('active')) activateTab('mobs'); }
   else tabBtn.classList.remove('hidden');
 }
 
-/* =========================
-   Promo code handling
-   ========================= */
+/* ========== Promo code handling (1..5 and admin) ========== */
 promoBtn.addEventListener('click', ()=>{
   const raw = (promoInput.value || '').trim();
   if(!raw){ codeMessage.textContent = 'Введите код.'; return; }
-  // admin code
-  if(raw === adminCode){
-    if(isUnlocked('a46')){ codeMessage.textContent='Достижение уже получено.'; promoInput.value=''; return; }
-    unlock('a46'); usedCodes.add(adminCode); saveState(); codeMessage.textContent='Код принят — вы получили достижение «Админ».';
+  // admin code special
+  if(raw.toLowerCase() === adminCode.toLowerCase()){
+    if(isUnlocked('a46')){ codeMessage.textContent = 'Достижение уже получено.'; promoInput.value=''; return; }
+    unlock('a46'); usedCodes.add(adminCode); saveState(); codeMessage.textContent = 'Код принят — вы получили достижение «Админ».';
     promoInput.value=''; return;
   }
-  // find in codeMap case-insensitive
-  let matched = null;
-  for(const k in codeMap){ if(k.toLowerCase() === raw.toLowerCase()){ matched = k; break; } }
-  if(!matched){ codeMessage.textContent='Код не найден.'; return; }
-  const achId = codeMap[matched];
-  if(usedCodes.has(matched) || isUnlocked(achId)){ codeMessage.textContent='Код уже использован.'; promoInput.value=''; return; }
-  unlock(achId); usedCodes.add(matched); saveState(); codeMessage.textContent='Код принят — достижение выдано.'; promoInput.value='';
+  // numeric codes 1..5
+  const key = raw;
+  if(!codeMap[key]){ codeMessage.textContent = 'Код не найден.'; return; }
+  const achId = codeMap[key];
+  if(usedCodes.has(key) || isUnlocked(achId)){ codeMessage.textContent = 'Код уже использован.'; promoInput.value=''; return; }
+  unlock(achId); usedCodes.add(key); saveState(); codeMessage.textContent = 'Код принят — достижение выдано.'; promoInput.value='';
 });
 
-/* =========================
-   Confirm "I wrote to bot" -> helper achievement
-   ========================= */
+/* ========== Confirm "I wrote to bot" ========== */
 confirmMessagedBot.addEventListener('click', ()=>{
   if(isUnlocked('a47')){ alert('Достижение уже получено.'); return; }
   unlock('a47'); saveState(); alert('Спасибо! Достижение «Помощник» выдано.');
 });
 
-/* =========================
-   Misc bindings and initial render
-   ========================= */
+/* ========== Misc bindings & initial render ========== */
 searchEl.addEventListener('input', ()=>{ renderMobs(); checkAchievements(); });
 worldFilterEl.addEventListener('change', ()=>{ renderMobs(); checkAchievements(); });
 document.addEventListener('click', (e)=>{ if(!e.target.closest('.settingsPanel')){ clickCount++; saveState(); checkAchievements(); } });
